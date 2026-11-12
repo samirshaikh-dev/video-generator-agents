@@ -1,106 +1,124 @@
-# Meelte Agent Roster
+# Meelte Video Prompt Workflow
 
-Eight agents implementing the workflow in `pipeline.md`, inside OpenCode. They live in `.opencode/agents/`, which is the directory OpenCode V2 discovers — a Markdown file there becomes an agent automatically.
+This file provides OpenCode-specific guidance for the Meelte video-prompt
+workflow. The host-agnostic source of truth is [`pipeline.md`](pipeline.md);
+the full project requirements are in [`req.txt`](req.txt). If this file and
+`pipeline.md` disagree, `pipeline.md` wins.
 
-This file sits at the repository root as `AGENTS.md`, so OpenCode loads it as project instructions in every session.
+## Project goal
 
-> **Canonical workflow: [`pipeline.md`](pipeline.md).** It is host-agnostic — Antigravity, Gemini CLI, Claude Code, Cursor, and OpenCode all read it. This file describes the OpenCode implementation; when the two disagree, `pipeline.md` wins.
+Turn a Meelte marketing brief into a structured video concept, time-coded shot
+plan, and brand-safe text-to-video prompt package. The default deliverable is
+the prompt package. Do not imply that a video was rendered unless a real video
+provider returned an asset.
 
-> **Status:** `.agents/agents/` was removed on 2026-11-12. It held
-> Antigravity-format copies of this roster plus two stale files
-> (`ai-engineer`, `video-engineer`) that referenced skills this repo no longer
-> has. `.opencode/agents/` is the only live agent location. Skills use
-> `.agents/skills/`; agents use `.opencode/agents/`.
+## Read first
 
-## Roster
+1. `pipeline.md` — canonical workflow, gates, prompt format, and delivery.
+2. `req.txt` — project scope, contracts, roles, and acceptance criteria.
+3. `brand/meelte-brand.json` — canonical brand source. Read it; do not rely on
+   remembered palette, typography, logo, or claim rules.
 
-| Agent | Mode | Skills loaded | Writes | Owns |
-|---|---|---|---|---|
-| `orchestrator` | primary | — | `outputs/**` | brief, sequencing, retries, delivery decision |
-| `brand-guardian` | subagent | `meelte-brand-system` | nothing | palette, type, logo, tone, conflicts |
-| `campaign-strategist` | subagent | `marketing-creative-strategy` | nothing | message, headline, supporting, CTA, claims |
-| `art-director` | subagent | `advertising-layout-composition`, `flat-vector-illustration` | nothing | concept, subject, props, composition, safe areas |
-| `prompt-engineer` | subagent | `image-prompt-engineering`, `flat-vector-illustration` | `outputs/**` | illustration spec, prompt, negatives, versioning |
-| `image-generator` | subagent | — | `outputs/**` | provider call, raw asset, generation metadata |
-| `visual-qa` | subagent | `image-quality-review`, `meelte-brand-system` | nothing | verdict, severity, revision instructions |
-| `finalizer` | subagent | `image-asset-finishing` | `outputs/**` | overlays, export, naming, metadata |
-
-Read-only agents have no `edit` and no `shell` permission. `image-generator` and `finalizer` ask before running shell commands; `orchestrator` has no shell at all.
-
-## Handoff map
+## Video workflow
 
 ```
-                 ┌──────────────┐
-   request ─────►│ orchestrator │
-                 └──────┬───────┘
-                        │ CampaignBrief
-        ┌───────────────┼────────────────┐
-        ▼               ▼                ▼
-  brand-guardian  campaign-strategist  (skip if copy supplied)
-        │               │
-        └───────┬───────┘
-                ▼
-          art-director ──► visual_concept + composition
-                ▼
-        prompt-engineer ──► illustration_spec + image_prompt
-                ▼
-          image-generator ──► GenerationResult
-                ▼
-            visual-qa ──► QualityReview
-                │
-      pass ─────┴───── fail/revise
-        │                 │
-        ▼                 └──► targeted feedback to the owning agent
-    finalizer                  (bounded retries)
-        ▼
-  FinalDeliverable
+request
+  → orchestrator normalizes VideoBrief
+  → brand and message constraints
+  → time-coded story and motion plan
+  → provider-neutral video prompt package
+  → prompt QA
+  → deliver prompt package
+  → optional provider generation/review, only when configured and requested
 ```
 
-## Contracts
+For each shot, preserve time arithmetic, one readable primary action, clear
+camera direction, and continuity across characters, props, setting, and style.
+Use exact user-supplied copy only. Do not ask a video model to invent or
+approximate the Meelte logo; reserve a clean area for the supplied asset or
+mark it `logo pending`.
 
-Each agent returns the object defined in its skill's Output contract, mirroring `req.txt` §7:
+## Skills
 
-| Agent | Returns |
+Load the skills needed for the request; do not read every skill by default.
+
+| Need | Skill |
 |---|---|
-| `brand-guardian` | `brand_constraints` + `conflicts[]` |
-| `campaign-strategist` | `campaign_message` |
-| `art-director` | `visual_concept` + `composition` |
-| `prompt-engineer` | `illustration_spec` + `image_prompt` |
-| `image-generator` | `GenerationResult` |
-| `visual-qa` | `QualityReview` |
-| `finalizer` | `FinalDeliverable` |
+| Brand, palette, logo, or tone | `.agents/skills/meelte-brand-system/SKILL.md` |
+| Campaign message, copy, or claims | `.agents/skills/marketing-creative-strategy/SKILL.md` |
+| Illustration style or character continuity | `.agents/skills/flat-vector-illustration/SKILL.md` |
+| Framing, aspect ratio, or safe areas | `.agents/skills/advertising-layout-composition/SKILL.md` |
+| Time-coded prompt writing or model adaptation | `.agents/skills/video-prompt-engineering/SKILL.md` |
+| Prompt or rendered-video review | `.agents/skills/video-quality-review/SKILL.md` |
+| Campaign series consistency | `.agents/skills/campaign-series-consistency/SKILL.md` |
 
-## Using them
+Use post-production skills such as Remotion, captions, audio finishing, and
+FFmpeg only when the request includes a real rendered asset or explicitly
+asks for post-production. They are not required to author a prompt package.
 
-**Explicit delegation** (works from any session):
+## OpenCode agent implementation status
 
-```
-Use the orchestrator agent to create a 4:5 Instagram post for a kirana store Diwali offer.
-```
+The files in `.opencode/agents/` still contain image-specific instructions.
+In particular, `image-generator` is not a video provider, and the current
+`prompt-engineer`, `visual-qa`, `art-director`, and `finalizer` are not yet
+video-specific agents. Do not route a video request through those image-only
+steps or claim that this roster implements video rendering.
 
-**Direct specialist call** when you only need one step:
+Until those agent files are migrated:
 
-```
-Use the brand-guardian agent to check whether an all-orange creative is on-brand.
-```
+- Follow `pipeline.md` directly for video prompt requests.
+- Use the video-prompt and video-QA skills where appropriate.
+- Return the prompt package and clearly state that no video was rendered.
+- Treat provider generation as unavailable unless an actual authorized video
+  tool is configured.
 
-**The orchestrator is already the default primary agent** — `opencode.jsonc` sets `default_agent: "orchestrator"`, so a new session in this project starts as the creative producer. Switch to `build` to edit source code; the orchestrator can only write under `outputs/`.
+The intended specialist responsibilities for a future OpenCode migration are:
 
-To go back to the coding agent by default, delete that line from `opencode.jsonc` or set it to `"build"`.
+| Role | Owns |
+|---|---|
+| `orchestrator` | VideoBrief, sequencing, approvals, retries, delivery decision |
+| `brand-guardian` | Palette, type, logo, tone, brand conflicts |
+| `campaign-strategist` | Audience insight, message, exact copy, claims |
+| `video-director` | Story, timed shots, action, camera, continuity |
+| `video-prompt-engineer` | Provider-neutral prompt, negatives, model notes, versioning |
+| `video-prompt-qa` | Prompt review; rendered review only with an actual asset |
+| `video-generator` (optional) | Configured provider call and generation metadata |
+| `finalizer` | Prompt-package delivery; video finishing only when implemented |
 
-## Revision policy
+Do not present these intended roles as implemented agents until their
+`.opencode/agents/` files and handoffs have been updated.
 
-- Default 2 image regenerations per request, configurable.
-- Deterministic fixes (overlay, logo composite, resize) do not consume the budget.
-- Text problems route to `finalizer`, layout to `art-director`, illustration to `prompt-engineer`.
-- On exhaustion, the orchestrator stops and reports the failing asset with the issue list.
+## Non-negotiables
 
-## Adding an agent
+- Never invent campaign facts, prices, offers, statistics, deadlines,
+  guarantees, testimonials, product capabilities, or dialogue.
+- Never silently change approved copy or brand constraints.
+- Never fabricate, redraw, or generate the Meelte logo.
+- Never present a prompt package as a rendered or brand-approved video.
+- Keep provider-specific behavior separate from the approved creative plan.
+- Preserve prompt versions and make revisions targeted and bounded.
+- Keep secrets in environment variables or secure secret storage; never log
+  credentials.
 
-1. Create `.opencode/agents/<kebab-case>.md`.
-2. Frontmatter: `description` (this is what the orchestrator sees when choosing), `mode`, and `permissions`.
-3. Body is the system prompt — role, what to load, what to do, what never to do, what to return.
-4. Add the agent to the orchestrator's `subagent` allow list if it should be callable.
-5. Add a row to the roster table above.
+## Revision routing
 
-Do not duplicate a skill's content into an agent prompt. The agent loads the skill; the skill holds the detail.
+| Issue | Owner |
+|---|---|
+| Message, headline, CTA, or claim | `campaign-strategist` |
+| Palette, logo, tone, or brand constraint | `brand-guardian` |
+| Shot timing, action, camera, or continuity | `video-director` |
+| Prompt wording, negatives, or named-model notes | `video-prompt-engineer` |
+| Rendered artefact or sync issue | Video generation/post-production owner |
+
+Use the owners above as workflow responsibilities, not as proof that the
+corresponding OpenCode agent is already implemented.
+
+## Adding or migrating an OpenCode agent
+
+1. Add or update `.opencode/agents/<kebab-case>.md`.
+2. Set its description, mode, permissions, role, inputs, output contract, and
+   failure behavior.
+3. Load reusable detail from `.agents/skills/`; do not duplicate skill content.
+4. Update the orchestrator's allowed subagents and the roster here.
+5. Test the handoff against `pipeline.md` and `req.txt` before calling the
+   agent video-capable.

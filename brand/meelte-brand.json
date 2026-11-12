@@ -3,11 +3,11 @@
   "updated": "2026-11-11",
   "status": "active",
   "source_of_truth": true,
-  "_note": "Single source of truth for Meelte visual identity. Skills and agents READ this file. Do not copy hex values into prompts or skill files; reference the token name instead so a palette change propagates everywhere.",
+  "_note": "Single source of truth for meelTe visual identity. Skills and agents READ this file. Do not copy hex values into prompts or skill files; reference the token name instead so a palette change propagates everywhere.",
   "brand": {
-    "name": "Meelte",
+    "name": "meelTe",
     "name_rules": [
-      "Always 'Meelte' - capital M, double e.",
+      "Always 'meelTe' - capital M, double e.",
       "Never render 'MELTE', 'Meelte.', 'Meelte Inc', or a split wordmark unless the supplied logo asset shows it.",
       "The brand name in copy is never abbreviated and never lowercased."
     ],

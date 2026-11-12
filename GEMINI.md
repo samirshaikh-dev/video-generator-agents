@@ -1,139 +1,121 @@
-# Meelte Image Generation — Project Guide
+# Meelte Video Prompt Generation — Gemini CLI Guide
 
-This file is the project context for Gemini CLI. Read it before acting.
+Read this file before working on the Meelte video-prompt workflow.
 
-## What this project is
+## Project goal
 
-A reusable, multi-agent system that turns a Meelte marketing request into a planned, on-brand, quality-checked image. It is not a prompt-template dump: each specialist step produces a structured object that the next step consumes.
+Turn a Meelte marketing request into a structured video concept, time-coded
+shot plan, and brand-safe, provider-neutral text-to-video prompt package. The
+default deliverable is the prompt package, not a rendered video.
 
-Full requirements: `req.txt`. Agent roster and handoffs: `AGENTS.md`.
+Canonical workflow: [`pipeline.md`](./pipeline.md). Full requirements:
+[`req.txt`](./req.txt). OpenCode-specific guidance:
+[`AGENTS.md`](./AGENTS.md).
 
-## Repository layout
+## Repository map
 
 ```
-pipeline.md               canonical, host-agnostic workflow — read this first
-AGENTS.md                 agent roster, handoff map, revision policy
-opencode.jsonc            OpenCode config (default agent = orchestrator)
-req.txt                   full project requirements
-brand/
-  meelte-brand.json       single source of truth: palette, type, logo, formats, copy limits
-.agents/skills/           16 skills (11 core + 5 post-production)
-  meelte-brand-system/
-  flat-vector-illustration/
-  marketing-creative-strategy/
-  advertising-layout-composition/
-  image-prompt-engineering/
-  image-quality-review/
-  image-asset-finishing/
-  campaign-series-consistency/
-.opencode/agents/         8 agents: orchestrator + 7 specialists
-outputs/<request_id>/     every generated image, prompt, review, and metadata
+pipeline.md               canonical host-agnostic video prompt workflow
+req.txt                   project scope, contracts, and acceptance criteria
+AGENTS.md                 OpenCode-specific video workflow and agent status
+GEMINI.md                 this Gemini CLI guide
+opencode.jsonc            OpenCode project configuration
+brand/meelte-brand.json   single source of truth for Meelte brand rules
+.agents/skills/           reusable creative, video prompt, and QA skills
+.opencode/agents/         existing OpenCode agents; currently image-specific
+outputs/<request_id>/     prompt packages and, only if actually generated, video assets
 ```
 
-## Brand rules you must apply
+## Brand rules
 
-Source of truth is `brand/meelte-brand.json`. Never restate brand values from memory — read the file.
+Read `brand/meelte-brand.json` for every request. It is the only source of
+truth for palette, typography, logo, copy limits, and visual direction. Do not
+rely on copied values or memory.
 
-| Token | Hex | Role |
-|---|---|---|
-| orange | `#FEA711` | primary accent, CTAs, focal highlights |
-| purple | `#743BAA` | primary anchor, headlines, large shapes |
-| lavender | `#F4EFFD` | background, breathing room |
-| charcoal | `#171923` | typography, outlines |
-| white | `#FFFFFF` | clarity, negative space |
-
-- Orange and purple must read as the dominant pair in any creative.
-- Typography: Poppins / Manrope / Plus Jakarta Sans, bold geometric sans only. Headline ≤ 6 words, supporting ≤ 14, CTA ≤ 4.
-- Illustration: polished 2D flat vector, subtle gradients, minimal outlines, soft shadows, rounded friendly characters. Never photorealism, 3D, or stock photography unless explicitly requested.
-- Logo: use the supplied asset only. Never fabricate, trace, or generate it. If no asset, reserve the zone and mark `logo pending`.
-- Formats: 1:1 (1080×1080), 4:5 (1080×1350), 16:9 (1920×1080), 9:16 (1080×1920).
+- Keep orange and purple as the dominant brand pair.
+- Preserve the approved playful 2D vector style by default, with clear,
+  purposeful motion and visual continuity across shots.
+- Use only exact user-supplied campaign copy. Prefer deterministic overlays
+  for exact text; never ask a video model to invent or approximate the logo.
+- Use a supplied approved logo asset, or reserve its zone and mark it
+  `logo pending`.
+- Do not add unsupported prices, offers, dates, statistics, guarantees,
+  testimonials, or product capabilities.
 
 ## Workflow
 
-**Follow [`pipeline.md`](pipeline.md).** It is the canonical workflow for every host — this section only maps its steps onto the OpenCode agents.
+Follow [`pipeline.md`](./pipeline.md) top to bottom:
 
-```
-pipeline.md step        OpenCode agent
-─────────────────────────────────────────
-1. normalize        →   orchestrator
-2. load brand       →   brand-guardian
-3. route to skills  →   orchestrator
-4. rewrite prompt   →   art-director + prompt-engineer
-5. self-check       →   orchestrator
-6. generate         →   image-generator
-7. review           →   visual-qa
-8. save             →   finalizer
-```
+1. Normalize the request into a `VideoBrief`; state defaults.
+2. Read the brand source and flag conflicts.
+3. Develop the campaign message, unless approved copy was supplied.
+4. Plan the story as time-coded shots with actions, camera, and continuity.
+5. Write the provider-neutral video prompt package.
+6. Run prompt QA, then route any issues to their owner.
+7. Return or save the prompt package with its version and assumptions.
+8. Generate and review a video only when the user requested it and an
+   authorized video tool is actually available.
 
-For a single image the orchestrator may run steps 1–5 itself instead of delegating. `pipeline.md` §0 and §5 are gates, not guidance.
+The pipeline defaults to short-form vertical social, 15 seconds, and 9:16
+when the user does not specify otherwise. Treat duration, resolution, frame
+rate, audio support, and other model limits as targets until a selected
+provider confirms them. Ask at most one clarification question, and only when
+the answer materially changes the creative.
 
-Failures route back to the owner of the fix, not automatically to generation:
-
-| Problem | Owner |
-|---|---|
-| Misspelled text, wrong price, layout of copy | `finalizer` (deterministic overlay) |
-| Composition, focal point, safe areas | `art-director` |
-| Illustration style, anatomy, clutter | `prompt-engineer` |
-| Message, headline, claims | `campaign-strategist` |
-| Palette, logo, tone | `brand-guardian` |
-
-Default retry budget: 2 image regenerations. Deterministic fixes do not consume it. On exhaustion, stop and report the failing asset with the issue list.
+Every prompt must describe ordered actions over time. Ensure shot durations
+sum to the requested duration, keep each shot's action and camera direction
+coherent, and preserve character, wardrobe, props, setting, and screen
+direction across cuts.
 
 ## Skills
 
-Each skill is `.agents/skills/<name>/SKILL.md` with YAML frontmatter. Load the skill before doing its work — it contains the procedure, output contract, checklist, examples, and failure cases.
+Load only the skills needed for the request.
 
 | Skill | Use for |
 |---|---|
-| `meelte-brand-system` | any palette, type, logo, or tone decision |
-| `flat-vector-illustration` | character, environment, rendering, style lock |
-| `marketing-creative-strategy` | message, copy, claims |
-| `advertising-layout-composition` | bands, focal point, safe areas, logo box |
-| `image-prompt-engineering` | prompt structure, negatives, model adapters |
-| `image-quality-review` | verdicts, severity, revision instructions |
-| `video-prompt-engineering` | time-coded shot plan → temporal prompt, camera, continuity, negatives |
-| `video-quality-review` | prompt review; rendered-video review only when an asset exists |
+| `meelte-brand-system` | Palette, typography, logo, tone, brand constraints |
+| `marketing-creative-strategy` | Audience insight, message, copy, claims |
+| `flat-vector-illustration` | Meelte illustration style and character direction |
+| `advertising-layout-composition` | Framing, aspect ratio, safe areas |
+| `video-prompt-engineering` | Time-coded video prompt, motion, continuity, model adaptation |
+| `video-quality-review` | Prompt review; rendered-video review only with a real asset |
+| `campaign-series-consistency` | Visual continuity across campaign videos |
 
-### Post-production layer
+Use post-production skills such as Remotion, caption animation, audio design,
+and FFmpeg only when the user asks for post-production or provides an actual
+rendered asset. They are not required to author a prompt package.
 
-Loaded only when a rendered asset is being finished. These are not part of
-prompt authoring and must not be read for a prompt-only deliverable:
+## OpenCode status
 
-| Skill | Use for |
-|---|---|
-| `remotion-motion-graphics` | kinetic type, lower thirds, callout pops, transition sweeps |
-| `caption-animation` | word-level animated captions, 9:16 safe-area placement |
-| `ffmpeg-captions-subtitles` | burning SRT/ASS into a generated clip |
-| `sound-design-film` | SFX cue design, layering, music/VO balance |
-| `video-editing` | assembly, concat, aspect reframe, mux |
-| `image-asset-finishing` | overlays, export, naming, metadata |
-| `campaign-series-consistency` | multi-asset campaigns, drift control |
+The current files in `.opencode/agents/` still contain image-specific
+instructions. The `image-generator` is not a video provider, and those agents
+must not be described as a working video-generation implementation. For a
+video request, follow `pipeline.md` and use the video-specific skills; do not
+route the request through image-only generation or finishing steps.
 
-## Agent roles
-
-If you are acting as the orchestrator, you own the brief, the sequence, the retry decision, and the final report. Delegate specialist work by loading the matching skill and producing that skill's output contract. Do not let one step silently change another step's approved output.
-
-If you are acting as a single specialist, produce only your contract and stop.
+No video provider adapter is configured. If no authorized video tool is
+available, return the prompt package and state plainly that no video was
+rendered. Never fabricate a generation result, asset path, or QA pass.
 
 ## Hard rules
 
-- Never invent prices, offers, statistics, timeframes, guarantees, testimonials, or product capabilities.
-- Never claim an image was generated when the provider call failed.
-- Never mark an asset brand-approved without a QA pass.
-- Brand name and headline may be rendered in-image (the project default) only when the user supplied the exact string and QA checks the spelling character by character. Prices, dates, and legal lines are overlaid or left out — never guessed.
-- Never paraphrase the style-lock block; drift starts there.
-- Never rewrite approved copy without flagging it.
-- Keep every prompt version and revision. Never overwrite a raw generation.
-- Secrets come from environment variables. Never hardcode or log a key.
+- Never invent campaign facts or alter approved copy silently.
+- Never fabricate, trace, or generate the Meelte logo.
+- Never describe a prompt package as a rendered or brand-approved video.
+- Keep provider-specific assumptions separate from the approved creative.
+- Preserve prompt versions and revisions; do not overwrite prior outputs.
+- Keep credentials in secure environment configuration. Never hardcode or log
+  secrets.
 
-## Clarification policy
+## Revision routing
 
-Ask only when the answer materially changes the output: platform/ratio when it changes composition, missing headline when copy is not supplied, a missing asset, or a brand conflict that needs a decision. Otherwise pick a sensible default, record it in the brief, and continue.
+| Issue | Owner |
+|---|---|
+| Message, headline, CTA, or claim | Campaign strategist |
+| Palette, logo, tone, or brand constraint | Brand guardian |
+| Story, timing, action, camera, or continuity | Video director |
+| Prompt wording, negatives, or model notes | Video prompt engineer |
+| Rendered artefact, captions, audio, or export | Video QA / post-production owner |
 
-## Status
-
-`pipeline.md`, the nine skills, the brand file, and the eight agents are in place.
-
-Inside OpenCode, `image-generator` still has no provider adapter — it will correctly return `status: "failed"` with `"no image provider configured"`. Do not fake a result. The provider adapter (`providers/`) and the §7 JSON schemas remain unbuilt.
-
-Outside OpenCode, `pipeline.md` needs no provider: if the host has an image tool (Antigravity, Gemini app, Ideogram, Midjourney), it generates; if not, it returns the finished prompt and stops.
+These are workflow responsibilities; do not assume a matching OpenCode agent
+exists until its implementation and handoffs are updated.
