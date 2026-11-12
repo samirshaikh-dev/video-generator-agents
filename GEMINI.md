@@ -22,7 +22,7 @@ GEMINI.md                 this Gemini CLI guide
 opencode.jsonc            OpenCode project configuration
 brand/meelte-brand.json   single source of truth for meelTe brand rules
 .agents/skills/           reusable creative, video prompt, and QA skills
-.opencode/agents/         existing OpenCode agents; currently image-specific
+.opencode/agents/         OpenCode video orchestrator and specialist agents
 outputs/<request_id>/     prompt packages and, only if actually generated, video assets
 ```
 
@@ -87,20 +87,17 @@ rendered asset. They are not required to author a prompt package.
 
 ## OpenCode status
 
-The current files in `.opencode/agents/` still contain image-specific
-instructions. The `image-generator` is not a video provider, and those agents
-must not be described as a working video-generation implementation. For a
-video request, follow `pipeline.md` and use the video-specific skills; do not
-route the request through image-only generation or finishing steps.
+`.opencode/agents/` contains the video orchestrator and specialist prompts:
+brand guardian, campaign strategist, video director, video prompt engineer,
+video prompt QA, optional video generator, and finalizer. The orchestrator's
+handoffs follow `pipeline.md` and use the reusable skills under
+`.agents/skills/`.
 
-The image-only `image-prompt-engineering`, `image-quality-review`, and
-`image-asset-finishing` skills were removed. Some legacy OpenCode agent files
-still reference them; do not use those image agents until their prompts and
-handoffs have been migrated.
-
-No video provider adapter is configured. If no authorized video tool is
-available, return the prompt package and state plainly that no video was
-rendered. Never fabricate a generation result, asset path, or QA pass.
+No video provider adapter is configured. The `video-generator` agent must
+return an explicit failure when no authorized provider is available. The
+normal deliverable is a QA-reviewed prompt package; state plainly that no
+video was rendered. Never fabricate a generation result, asset path, or QA
+pass.
 
 ## Hard rules
 

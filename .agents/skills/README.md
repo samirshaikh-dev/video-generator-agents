@@ -17,8 +17,8 @@ contains its own procedure, output contract, checklist, and failure cases.
 | [`campaign-series-consistency`](campaign-series-consistency/SKILL.md) | Shared style and controlled variation across a video series | `series` |
 
 Image-only prompt authoring, image quality review, and image asset finishing
-skills have been removed. Do not treat the legacy image-specific OpenCode agent
-files as video-capable.
+skills have been removed. The former image-specific OpenCode agent prompts
+have been migrated to the video roles listed in `AGENTS.md`.
 
 ## Optional post-production skills
 
@@ -57,8 +57,9 @@ VideoBrief
   -> optional post-production        (only with a rendered asset)
 ```
 
-Video director and provider roles are workflow responsibilities; an
-OpenCode agent is not implemented merely because the role appears in this map.
+The OpenCode specialist agents live in `.opencode/agents/`. The video generator
+role is optional: no provider adapter is configured, so it must fail honestly
+until an authorized provider is added.
 
 ## Adding a skill
 

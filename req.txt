@@ -465,9 +465,13 @@ For the prompt-workflow documentation:
    generation.
 4. Documented meelTe brand, temporal planning, continuity, and QA gates.
 
-For a future implementation phase, as approved:
-- Specialist video agents/skills, schemas, orchestrator, optional provider
-  adapter, tests, and setup documentation.
+The specialist video skills and OpenCode agents/orchestrator are present.
+Remaining implementation work, if separately approved:
+- Validated JSON schemas for the shared handoff contracts.
+- An optional provider adapter with secure configuration and failure handling.
+- Automated tests for prompt construction, timing, routing, and QA decisions.
+- Provider setup documentation and a sample prompt package with no claim that
+  a video was rendered.
 - A sample campaign prompt package with no claim that a video was rendered.
 
 END OF REQUIREMENTS

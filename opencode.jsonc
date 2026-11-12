@@ -1,9 +1,9 @@
 {
-  // OpenCode V2 project configuration for the meelTe image-generation workspace.
+  // OpenCode V2 project configuration for the meelTe video-prompt workspace.
   // Schema: https://opencode.ai/config.json
   "$schema": "https://opencode.ai/config.json",
 
-  // New sessions start in the image-generation orchestrator, not the coding agent.
+  // New sessions start in the video-prompt orchestrator, not the coding agent.
   // The orchestrator can only write under outputs/ - switch to `build` to edit code.
   // Revert by deleting this line or setting it to "build".
   "default_agent": "orchestrator"

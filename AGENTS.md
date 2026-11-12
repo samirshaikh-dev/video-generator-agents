@@ -56,42 +56,27 @@ Use post-production skills such as Remotion, captions, audio finishing, and
 FFmpeg only when the request includes a real rendered asset or explicitly
 asks for post-production. They are not required to author a prompt package.
 
-## OpenCode agent implementation status
+## OpenCode agent roster
 
-The files in `.opencode/agents/` still contain image-specific instructions.
-In particular, `image-generator` is not a video provider, and the current
-`prompt-engineer`, `visual-qa`, `art-director`, and `finalizer` are not yet
-video-specific agents. Do not route a video request through those image-only
-steps or claim that this roster implements video rendering.
-
-The image-only `image-prompt-engineering`, `image-quality-review`, and
-`image-asset-finishing` skills have been removed. Legacy agent files may still
-contain stale references to them; do not invoke those image agents until their
-prompts and handoffs are migrated.
-
-Until those agent files are migrated:
-
-- Follow `pipeline.md` directly for video prompt requests.
-- Use the video-prompt and video-QA skills where appropriate.
-- Return the prompt package and clearly state that no video was rendered.
-- Treat provider generation as unavailable unless an actual authorized video
-  tool is configured.
-
-The intended specialist responsibilities for a future OpenCode migration are:
+The video-specific agents are discovered from `.opencode/agents/`. The
+orchestrator coordinates these roles; reusable procedures and detailed output
+contracts remain in `.agents/skills/`.
 
 | Role | Owns |
 |---|---|
-| `orchestrator` | VideoBrief, sequencing, approvals, retries, delivery decision |
-| `brand-guardian` | Palette, type, logo, tone, brand conflicts |
-| `campaign-strategist` | Audience insight, message, exact copy, claims |
-| `video-director` | Story, timed shots, action, camera, continuity |
-| `video-prompt-engineer` | Provider-neutral prompt, negatives, model notes, versioning |
-| `video-prompt-qa` | Prompt review; rendered review only with an actual asset |
-| `video-generator` (optional) | Configured provider call and generation metadata |
-| `finalizer` | Prompt-package delivery; video finishing only when implemented |
+| `orchestrator` | VideoBrief, sequence, consistency, revision routing, delivery |
+| `brand-guardian` | Palette, typography, logo, tone, brand conflicts |
+| `campaign-strategist` | Audience insight, message, exact copy, claim audit |
+| `video-director` | Story, timed shots, composition, camera, continuity |
+| `video-prompt-engineer` | Provider-neutral prompt, negatives, model notes, versions |
+| `video-prompt-qa` | Prompt review; rendered review only with a real asset |
+| `video-generator` | Optional configured provider call; fails honestly when unavailable |
+| `finalizer` | QA-gated prompt-package delivery and metadata |
 
-Do not present these intended roles as implemented agents until their
-`.opencode/agents/` files and handoffs have been updated.
+No video provider adapter is configured. The `video-generator` agent must
+return an explicit failure if no authorized provider is available; it must
+never fabricate a result. The default complete workflow delivers a prompt
+package and states that no video was rendered.
 
 ## Non-negotiables
 
@@ -115,8 +100,9 @@ Do not present these intended roles as implemented agents until their
 | Prompt wording, negatives, or named-model notes | `video-prompt-engineer` |
 | Rendered artefact or sync issue | Video generation/post-production owner |
 
-Use the owners above as workflow responsibilities, not as proof that the
-corresponding OpenCode agent is already implemented.
+Use these owners for the corresponding specialist handoffs. Rendering and
+post-production remain optional and unavailable until an authorized provider
+or tool is configured.
 
 ## Adding or migrating an OpenCode agent
 
