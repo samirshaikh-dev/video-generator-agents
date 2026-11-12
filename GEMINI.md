@@ -17,7 +17,7 @@ opencode.jsonc            OpenCode config (default agent = orchestrator)
 req.txt                   full project requirements
 brand/
   meelte-brand.json       single source of truth: palette, type, logo, formats, copy limits
-.agents/skills/           9 skills (8 Meelte + find-skills)
+.agents/skills/           16 skills (11 core + 5 post-production)
   meelte-brand-system/
   flat-vector-illustration/
   marketing-creative-strategy/
@@ -91,6 +91,21 @@ Each skill is `.agents/skills/<name>/SKILL.md` with YAML frontmatter. Load the s
 | `advertising-layout-composition` | bands, focal point, safe areas, logo box |
 | `image-prompt-engineering` | prompt structure, negatives, model adapters |
 | `image-quality-review` | verdicts, severity, revision instructions |
+| `video-prompt-engineering` | time-coded shot plan → temporal prompt, camera, continuity, negatives |
+| `video-quality-review` | prompt review; rendered-video review only when an asset exists |
+
+### Post-production layer
+
+Loaded only when a rendered asset is being finished. These are not part of
+prompt authoring and must not be read for a prompt-only deliverable:
+
+| Skill | Use for |
+|---|---|
+| `remotion-motion-graphics` | kinetic type, lower thirds, callout pops, transition sweeps |
+| `caption-animation` | word-level animated captions, 9:16 safe-area placement |
+| `ffmpeg-captions-subtitles` | burning SRT/ASS into a generated clip |
+| `sound-design-film` | SFX cue design, layering, music/VO balance |
+| `video-editing` | assembly, concat, aspect reframe, mux |
 | `image-asset-finishing` | overlays, export, naming, metadata |
 | `campaign-series-consistency` | multi-asset campaigns, drift control |
 

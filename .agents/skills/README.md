@@ -16,8 +16,22 @@ The eight agents that consume these skills live in `.opencode/agents/`. See [`AG
 | [`advertising-layout-composition`](advertising-layout-composition/SKILL.md) | bands, focal point, text-safe areas, logo box, margins | `composition` |
 | [`image-prompt-engineering`](image-prompt-engineering/SKILL.md) | positive/negative prompts, model adapters, versioning | `image_prompt` |
 | [`image-quality-review`](image-quality-review/SKILL.md) | scoring, severity, verdict, targeted revisions | `quality_review` |
+| [`video-prompt-engineering`](video-prompt-engineering/SKILL.md) | temporal prompt structure, camera, continuity, negatives, versioning | `VideoPromptPackage` |
+| [`video-quality-review`](video-quality-review/SKILL.md) | prompt review always, rendered-video review when an asset exists | `QualityReview` |
 | [`image-asset-finishing`](image-asset-finishing/SKILL.md) | overlays, resize/pad, export, naming, metadata | `final_deliverable` |
 | [`campaign-series-consistency`](campaign-series-consistency/SKILL.md) | lock set, variation set, sequence, drift control | `series` |
+
+### Post-production skills
+
+Loaded only when finishing a rendered asset, never for prompt authoring:
+
+| Skill | Owns |
+|---|---|
+| [`remotion-motion-graphics`](remotion-motion-graphics/SKILL.md) | kinetic type, lower thirds, callouts, transition sweeps |
+| [`caption-animation`](caption-animation/SKILL.md) | word-level animated captions, 9:16 safe area |
+| [`ffmpeg-captions-subtitles`](ffmpeg-captions-subtitles/SKILL.md) | SRT/ASS burn-in on a generated clip |
+| [`sound-design-film`](sound-design-film/SKILL.md) | SFX cue design, layering, music/VO balance |
+| [`video-editing`](video-editing/SKILL.md) | assembly, concat, aspect reframe, mux |
 
 `find-skills` is also installed — it is a general discovery helper, not part of the Meelte workflow.
 

@@ -6,7 +6,11 @@ This file sits at the repository root as `AGENTS.md`, so OpenCode loads it as pr
 
 > **Canonical workflow: [`pipeline.md`](pipeline.md).** It is host-agnostic — Antigravity, Gemini CLI, Claude Code, Cursor, and OpenCode all read it. This file describes the OpenCode implementation; when the two disagree, `pipeline.md` wins.
 
-> `.agents/agents/` is **not** an OpenCode discovery path. Agent files placed there are inert. Skills use `.agents/skills/`; agents use `.opencode/agents/`.
+> **Status:** `.agents/agents/` was removed on 2026-11-12. It held
+> Antigravity-format copies of this roster plus two stale files
+> (`ai-engineer`, `video-engineer`) that referenced skills this repo no longer
+> has. `.opencode/agents/` is the only live agent location. Skills use
+> `.agents/skills/`; agents use `.opencode/agents/`.
 
 ## Roster
 
