@@ -1,90 +1,69 @@
-# Aspect Ratios — Composition Reference
+# Social Video Aspect Ratios — Composition Reference
 
-## Format table
+These are composition targets, not a promise that every platform placement
+accepts every dimension. Check the current upload requirements before export.
+The source of truth for Meelte's existing pixel presets remains
+`brand/meelte-brand.json`.
 
-| Format | Ratio | Pixels | Safe margin | Header | Illustration | Footer | Skeleton |
-|---|---|---|---|---|---|---|---|
-| `ig-square` | 1:1 | 1080×1080 | 6% | 32% | 50% | 18% | stacked |
-| `ig-portrait` | 4:5 | 1080×1350 | 6% | 30% | 52% | 18% | stacked |
-| `banner-landscape` | 16:9 | 1920×1080 | 4% | 30% | 55% | 15% | split |
-| `story-vertical` | 9:16 | 1080×1920 | 8% | 24% | 56% | 20% | stacked |
+## Platform targets
 
-Bands are starting points. Adjust for copy length, never for decoration.
+| Placement | Ratio | Target pixels | Composition notes |
+|---|---:|---:|---|
+| Instagram Reels / Stories | 9:16 | 1080×1920 | Vertical action; protect top and bottom UI zones |
+| Instagram feed portrait | 4:5 | 1080×1350 | Tall central action; recompose from 9:16 |
+| Instagram feed square | 1:1 | 1080×1080 | Compact action; preserve subject and captions |
+| LinkedIn feed landscape | 16:9 | 1920×1080 | Wider environment or split composition |
+| LinkedIn feed square | 1:1 | 1080×1080 | Compact feed composition when requested |
+| LinkedIn portrait | 4:5 | 1080×1350 | Use only when the intended placement supports it |
 
-## 1:1 — square post
+Ratios and pixels are planning targets. Resolve the specific placement first;
+do not assume a platform or player will preserve the full canvas.
 
-**Character:** balanced, scannable in a feed, no dominant axis.
+## 9:16 — Instagram Reel or Story
 
-- Header top 32%: headline, left-aligned, 2 lines max.
-- Illustration 50%: subject centred, props clustered around it.
-- Footer 18%: supporting line left, logo right.
-- CTA (if any): inside the header block, below the headline.
+- Make the action readable in a narrow frame; use a clear subject silhouette.
+- Keep the main action in the middle area, clear of top profile controls and
+  bottom actions/caption UI.
+- Leave a stable caption zone; avoid placing important gestures behind it.
+- Keep all critical elements inside the central crop-safe region.
+- Do not reuse the 4:5 composition by simply extending the background.
 
-Risks: dead centre composition looks static. Offset the subject 3–5% left or right.
+## 4:5 — Instagram feed portrait or supported LinkedIn placement
 
-## 4:5 — portrait feed
+- Use the height for one clear vertical action, not extra decorative content.
+- Keep the face, hands, focal prop, and caption area inside conservative edge
+  margins.
+- Re-plan camera travel and subject scale for this crop; do not crop a Reel
+  master.
 
-**Character:** tallest social format, more vertical room, more scroll-stopping area.
+## 1:1 — Instagram or LinkedIn feed
 
-- Header 30%: headline, 2–3 lines.
-- Illustration 52%: vertical action, subject can be full-height.
-- Footer 18%: supporting + CTA left, logo right.
-- Bottom 8% may be covered by platform UI — keep copy above it.
+- Keep the main action compact and readable at thumbnail size.
+- Avoid placing captions or a logo over the focal subject.
+- Use a close, simple composition; do not squeeze a landscape scene into a
+  square without rebuilding it.
 
-Risks: cramming a 1:1 composition into the extra height, leaving a dead band. Use the height for a taller subject or a prop stack.
+## 16:9 — LinkedIn landscape
 
-## 16:9 — landscape banner
+- Use the width for a clear subject/action plus a restrained negative-space
+  area for optional copy or brand overlays.
+- Do not make the subject too small in a wide environment.
+- Keep key action away from lateral edges to support player cropping and
+  future reframing.
 
-**Character:** horizontal reading, two-column logic, often viewed small.
+## Cross-platform adaptation
 
-- Split into vertical zones: text panel / illustration / secondary panel.
-- Headline panel 30–34% width, full height.
-- Illustration 46–55% width, subject at optical centre.
-- Right panel for supporting copy and CTA.
-- Logo bottom-left on the text panel or bottom-right on white.
+When one concept ships to multiple placements:
 
-Risks: stretching a square layout. Recompose. Also: text too small when the banner is scaled down — headline must remain legible at 30% scale.
-
-## 9:16 — story / reel cover
-
-**Character:** full-screen, thumb-heavy interaction, platform chrome top and bottom.
-
-- Header 24%: headline only, 2–3 words ideal.
-- Illustration 56%: subject centred vertically slightly high.
-- Footer 20%: supporting + CTA, above the bottom 15% reserved for platform UI.
-- Logo: footer, or omitted if space is tight.
-
-Risks: text under the profile row or the reply bar. Keep all copy within the middle 70% of the height.
-
-## Custom ratios
-
-1. Find the nearest ratio by aspect value.
-2. Inherit its margins and skeleton.
-3. Adjust bands proportionally: header and footer scale with the shorter dimension.
-4. Re-check edge protection and text size at the target pixel size.
-5. Record `derived_from: <format_id>` in the composition map.
-
-Examples:
-
-| Custom | Derived from | Adjustment |
-|---|---|---|
-| 2:1 | 16:9 | reduce illustration band, widen text panel |
-| 3:4 | 4:5 | increase illustration band, reduce header |
-| 1.91:1 (link preview) | 16:9 | reduce band heights, increase side margins |
-
-## Multi-format adaptation
-
-When one concept ships in several ratios:
-
-1. Keep the message hierarchy identical.
-2. Keep the illustration subject and style-lock identical.
-3. Re-plan the skeleton per ratio — do not scale.
-4. Re-check text line breaks per ratio.
-5. Keep the logo position consistent where possible (footer-left), switch only when it collides.
+1. Keep the approved message, illustration style, and character model.
+2. Build a separate composition and safe-area map per ratio.
+3. Reposition or reframe the action; do not rely on center-cropping.
+4. Re-check captions, logo clear space, UI zones, and camera travel in each.
+5. Record any target-specific compromise in the composition contract.
 
 ## Failure signals
 
-- Square artwork letterboxed into 16:9 — scaled, not recomposed.
-- Headline unreadable at thumbnail — size set for full resolution only.
-- Subject cut off in 4:5 — 1:1 crop reused.
-- Story copy under the UI — bottom margin ignored.
+- A vertical master is cropped into a square and loses a gesture.
+- A wide shot makes the subject unreadable on a phone.
+- Captions or important action sit under player controls.
+- The camera path exits the safe crop even though the opening frame looked safe.

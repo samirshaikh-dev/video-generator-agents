@@ -1,11 +1,13 @@
 # Style Lock — meelte-flat-vector-v1
 
-The style lock is a block of text reused **verbatim** across every generation in a series. Changing one word is a style change and must be recorded as a new lock version.
+The style lock is reused **verbatim** across shots and versions of a campaign
+video. Changing a locked visual rule is a style change; record it as a new
+lock version and get approval before using it.
 
 ## Canonical block
 
 ```
-Polished 2D commercial vector illustration for a modern retail brand.
+Polished 2D commercial vector animation for a modern retail brand.
 Flat vector shapes with subtle gradients for depth.
 Smooth clean edges, minimal outlines in a darker shade of each shape's fill.
 Friendly characters with expressive simplified faces and rounded,
@@ -14,85 +16,78 @@ Simplified recognisable objects and environments, three depth planes only.
 Soft single-direction shadows at low opacity, restrained highlights.
 Limited intentional palette: warm orange, deep purple, soft lavender,
 dark charcoal, white.
-Clear single focal point, uncluttered background, generous negative space.
+Clear single focal subject, uncluttered background, generous negative space.
 Bold editorial advertising composition, playful and approachable.
-No text, no lettering, no signage copy.
+Keep character identity, wardrobe, prop design, line weight, palette, and
+lighting consistent across every shot.
+No readable text, no captions, no lettering, no signage copy, no logo.
 ```
 
 ## What is locked
 
 | Element | Locked value |
 |---|---|
-| Treatment | flat vector, 2D, commercial |
+| Treatment | flat vector, 2D, commercial animation |
 | Gradients | subtle, single direction |
 | Outlines | minimal, same-hue darker |
 | Character ratio | 1:5.5 |
 | Depth planes | three |
 | Shadow model | one soft direction, low opacity |
 | Highlights | restrained, one per major shape |
-| Palette | five brand tokens |
-| Detail level | controlled, single focal point |
-| Text | none in image |
+| Palette | five Meelte brand tokens |
+| Detail level | controlled, one focal subject per beat |
+| Continuity | character, wardrobe, props, lighting, and geometry stay stable |
+| Text | none from the video model |
 
-## Text-mode line
+## What may vary per shot
 
-The final line — `No text, no lettering, no signage copy.` — is a **text-mode instruction, not a style rule**. It is the only line that changes between runs:
+- Character pose and expression, within the character model.
+- The planned action and its start/end state.
+- Prop position when moved by the approved action.
+- Camera framing and movement when the shot plan calls for it.
+- The scene's focal area, while preserving the approved visual hierarchy.
 
-| `text_mode` | Final line |
-|---|---|
-| `overlay_after_generation` | `No text, no lettering, no signage copy.` |
-| `in_image` | the quoted-text instruction from `pipeline.md` §4, Block 5 |
-
-Substituting it is not a style change and does not create a new lock version. Changing any other line does.
-
-## What may vary per image
-
-- Scene, setting, props
-- Character roles, age, build, clothing colour
-- Pose and expression
-- Focal object
-- Layout zone (which part of the frame the illustration occupies)
-- Aspect ratio and detail budget
+Do not vary character identity, clothing, line weight, light direction, palette,
+or environment geometry to make an individual shot easier.
 
 ## Drift detection
 
-Compare a new image to the last approved one on these axes. Any mismatch is drift:
+Compare adjacent shots and rendered keyframes. A mismatch is drift unless
+explicitly planned:
 
-1. **Outline weight** — thicker or thinner by more than ~30%?
-2. **Gradient direction** — has it changed axis?
-3. **Shadow count** — more than one shadow per object?
-4. **Detail level** — background suddenly rendered?
-5. **Proportion** — characters noticeably more or less realistic?
-6. **Palette** — a hue that is not a token?
-7. **Edge quality** — texture, grain, or brush strokes present?
-8. **Face construction** — different eye/brow vocabulary?
+1. Character face, proportions, clothing, or hairstyle changed.
+2. Outline weight, gradient direction, or shadow direction shifted.
+3. Props or background geometry appeared, disappeared, or morphed.
+4. Palette gained a non-brand dominant hue.
+5. One shot gained photographic depth, texture, or 3D rendering.
+6. Screen direction or character position changed without a cut that explains it.
 
 ## Versioning
 
 | Lock | Change | Reason |
 |---|---|---|
 | `meelte-flat-vector-v1` | initial | baseline |
-| `meelte-flat-vector-v2` | only when a deliberate style evolution is approved | record the reason and the date |
+| `meelte-flat-vector-v2` | deliberate approved evolution only | record reason and date |
 
-Rules:
-
-- A new lock requires explicit approval, not an opportunistic edit.
-- Existing approved assets keep their original lock id.
-- Never mix two locks in one carousel or campaign set.
+Existing campaign assets keep their original lock ID. Never mix two locks in
+one campaign video unless the creative explicitly calls for a transition.
 
 ## Reuse pattern
 
-When generating image N of a series:
+For each shot in a video:
 
 1. Paste the canonical block unchanged.
-2. Append the scene-specific paragraph.
-3. Append the format paragraph (ratio, safe areas).
-4. Append the negative block.
-5. Record `style_lock_id` in the generation metadata.
+2. Add the shot's subject action, start/end state, and camera instruction.
+3. Add only continuity details that differ from the prior shot by design.
+4. Add the target format and safe-area constraints from
+   `advertising-layout-composition`.
+5. Add concise video-specific negatives.
+6. Record the lock ID in the prompt package.
 
 ## Failure signals
 
-- Two images in a series have different outline weights — lock not applied.
-- Background gained detail over the series — detail budget crept.
-- One image has a photographic light falloff — drift into realism.
-- Character faces look like different artists drew them — face vocabulary changed.
+- Character identity changes between cuts.
+- Background or props flicker or morph.
+- A character moves without a clear action or end state.
+- Texture, grain, or photorealistic lighting creeps in.
+- A shot's palette or silhouette no longer matches the rest of the video.

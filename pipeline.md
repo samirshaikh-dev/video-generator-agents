@@ -91,12 +91,12 @@ Read only what the request needs. Skills live in `.agents/skills/<name>/SKILL.md
 | headline, CTA, offer, or claim | `marketing-creative-strategy/SKILL.md` |
 | framing, aspect ratio, text-safe areas | `advertising-layout-composition/SKILL.md` |
 | a campaign series | `campaign-series-consistency/SKILL.md` |
-| video prompt structure or model adaptation | `video-prompt-engineering/SKILL.md`, if present |
-| reviewing a rendered video | `video-quality-review/SKILL.md`, if present |
+| video prompt structure or model adaptation | `video-prompt-engineering/SKILL.md` |
+| reviewing a rendered video | `video-quality-review/SKILL.md` |
 
-If a video-specific skill is not present, follow this pipeline without
-pretending the skill exists. Apply image-composition guidance only to framing
-and safe areas; do not treat a video as a static image.
+Apply vector-illustration and composition guidance to the whole timeline:
+preserve character continuity and platform safe areas, and do not treat a video
+as a static image.
 
 ---
 
@@ -109,6 +109,9 @@ Before writing the final prompt, make a compact, time-coded shot plan:
 - Split the requested duration into a small number of readable shots/beats.
 - Specify each shot's time range, subject action, framing, camera movement,
   transition, lighting, and continuity requirements.
+- Create a separate `video_composition` map for each target platform and
+  aspect ratio, including focal bounds, UI/caption/logo zones, and motion
+  corridors.
 - Ensure shot durations add up to the requested total duration.
 - Keep each shot's action and camera instruction physically coherent. Avoid
   contradictory directions or several competing actions at once.
@@ -123,18 +126,20 @@ Produce:
 1. **Brief summary** — objective, audience, platform, target duration, and
    aspect ratio.
 2. **Creative concept** — the key visual idea and emotional tone.
-3. **Shot plan** — time-coded actions and camera directions, with continuity
+3. **Composition maps** — target-specific framing, safe areas, UI zones, and
+   motion corridors for each requested placement.
+4. **Shot plan** — time-coded actions and camera directions, with continuity
    notes.
-4. **Main prompt** — a clear, provider-neutral description of subject,
+5. **Main prompt** — a clear, provider-neutral description of subject,
    setting, temporal progression, motion, camera, visual style, lighting,
    framing, and continuity.
-5. **Audio instructions** — only if relevant and supported by the brief.
-6. **Text/logo instructions** — quote only exact supplied copy; otherwise
+6. **Audio instructions** — only if relevant and supported by the brief.
+7. **Text/logo instructions** — quote only exact supplied copy; otherwise
    request no generated text and reserve clean areas for deterministic
    overlays. Use only supplied logo files.
-7. **Negative constraints** — brief-specific exclusions; separate them from
+8. **Negative constraints** — brief-specific exclusions; separate them from
    the main prompt when the target model supports a negative prompt.
-8. **Target specs and assumptions** — duration, ratio, dimensions if supplied,
+9. **Target specs and assumptions** — duration, ratio, dimensions if supplied,
    model target if named, and any unresolved provider limitations.
 
 Do not include provider parameters as facts unless a provider/model has been

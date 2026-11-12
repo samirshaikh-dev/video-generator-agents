@@ -139,5 +139,4 @@ report the failing shot with the unresolved issue list.
 
 ## Sources
 
-Scoring and severity model adapted from `image-quality-review`; checks from
-`req.txt` §10 and `pipeline.md` §5/§7.
+Scoring and severity follow `req.txt` §10 and `pipeline.md` §5/§7.

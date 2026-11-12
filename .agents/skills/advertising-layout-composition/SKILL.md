@@ -1,135 +1,175 @@
 ---
 name: advertising-layout-composition
-description: Define the composition, visual hierarchy, focal point, grid bands, text-safe areas, logo zone, and margins for a Meelte creative at 1:1, 4:5, 16:9, or a custom ratio. Use when planning where the headline, illustration, supporting copy, CTA, and logo sit; when a layout is crowded or has competing focal points; when adapting one concept across formats; or when checking that nothing important is clipped or too close to an edge. Covers responsive composition rules by aspect ratio.
+description: Plan the time-aware composition of illustrated Meelte social videos for LinkedIn and Instagram. Use for aspect-ratio adaptation, focal placement, subject-safe bounds, caption/logo zones, platform UI clearances, camera paths, and shot-to-shot layout continuity. Does not own campaign copy, illustration design, story timing, or video rendering.
 ---
 
-# Advertising Layout & Composition
+# Advertising Layout & Composition for Video
 
 ## Purpose
 
-Own the *where*. Turn a message and an illustration spec into a composition map that a prompt and a finishing layer can both execute.
+Own where important elements sit and how the composition changes over time.
+Turn an approved message, illustration spec, and shot plan into a composition
+map that remains legible on LinkedIn and Instagram placements.
 
 Use it when:
 
-- A creative needs a layout for a specific ratio.
-- A concept must be adapted across 1:1, 4:5, and 16:9.
-- Text-safe zones, margins, or logo placement need defining.
-- A layout feels crowded, flat, or has two focal points.
+- Planning an illustrated social video for LinkedIn, Instagram Feed, Reels, or
+  Stories.
+- Adapting one video concept to landscape, square, portrait, or vertical.
+- Defining subject bounds, caption-safe areas, logo placement, or UI clearance.
+- A frame feels crowded, loses its focal point, or crops important action.
 
-Not for: copy (`marketing-creative-strategy`), illustration content (`flat-vector-illustration`), final export (`image-asset-finishing`).
+Not for: copy (`marketing-creative-strategy`), illustration appearance
+(`flat-vector-illustration`), shot story/timing (`video director`), or prompt
+assembly (`video-prompt-engineering`).
 
-## Inputs required
+## Inputs
 
 | Input | Required | Notes |
 |---|---|---|
-| Aspect ratio / format | yes | From the brief or `brand/meelte-brand.json` |
-| Message hierarchy | yes | Headline, supporting, CTA presence |
-| Illustration spec | yes | Subject, props, focal point |
-| Logo asset + variant | no | Reserve a zone if absent |
-| Series template | no | Reuse the grid for consistency |
+| VideoBrief and platform placement | yes | LinkedIn/Instagram placement matters |
+| Aspect ratio and duration | yes | Use a target from the brief or ask once |
+| Approved message and copy | yes | Preserve exact supplied strings |
+| Shot plan and focal action | yes | Layout must serve each beat |
+| Illustration spec | yes | Characters, props, and motion bounds |
+| Logo asset | no | Reserve a zone if absent |
+| Caption/overlay plan | no | Keep text out of generated video unless explicitly approved |
 
 ## Procedure
 
-1. **Resolve the format.** Load the `formats[]` entry. If custom, derive margins and bands from the nearest ratio and record the derivation.
-
-2. **Pick the composition skeleton.** Choose one, do not improvise:
-   - **Stacked** (default 1:1, 4:5) — header / illustration / footer.
-   - **Split** (default 16:9) — left panel / centre illustration / right panel.
-   - **Overlay** (hero banners) — full-bleed illustration with a solid text panel.
-   - **Centred mark** (announcement) — headline top, subject centre, logo bottom.
-
-3. **Allocate bands.** Use the format's band percentages as a starting point, then adjust for copy length. Never let the header exceed 40% — the illustration must remain the largest element.
-
-4. **Place the focal point.** It should sit near the optical centre (about 45% height, 50% width), not the geometric centre. State its coordinates as percentages.
-
-5. **Define the visual flow.** One path: headline → subject → supporting → CTA → logo. Say which direction the eye travels (usually Z or F pattern).
-
-6. **Define text-safe areas.** One rectangle per text block, expressed as percentages, with the background token that fills it. No text block may overlap the illustration's focal zone.
-
-7. **Reserve the logo box.** Position by ratio, size at 13–15% of width, clear space respected.
-
-8. **Set margins.** Use the format's `safe_margin_pct`. Increase at the bottom on 4:5 and 9:16 for platform UI.
-
-9. **Check balance.** Compare visual weight left/right and top/bottom. If one corner is empty and another is dense, move a prop or adjust the crop — do not add decoration.
-
-10. **Emit the composition map.**
+1. **Resolve the placement and target canvas.** Read
+   `references/aspect-ratios.md` and `references/safe-areas.md`. Use the
+   requested platform placement; treat dimensions as targets and verify
+   platform upload requirements before delivery.
+2. **Recompose for every ratio.** Do not stretch, letterbox, or center-crop a
+   master layout when it removes a subject, gesture, caption zone, or logo.
+   Use a separate composition map for each delivery format.
+3. **Choose a skeleton for each shot.** Use stacked, split, full-frame with
+   protected overlay zones, or a deliberate close-up. The same skeleton may
+   evolve only when the story motivates the change.
+4. **Set the focal subject and safe bounds.** Give its center and bounding box
+   in percentages. Keep faces, hands, and key props inside the crop-safe area
+   for the entire shot, including during camera movement.
+5. **Define visual flow and motion corridors.** State where the eye travels,
+   where the subject enters/exits, and which regions stay clear for captions,
+   CTA, and logo. Do not let text or platform UI cover the focal action.
+6. **Plan persistent overlays.** Give captions and branding stable zones across
+   shots where practical. Quote only user-supplied copy. Reserve logo clear
+   space for the approved asset; never ask the video model to render it.
+7. **Protect UI and mobile readability.** Keep critical content away from
+   Instagram Reel/Story controls and LinkedIn player/feed chrome. Platform UI
+   can change, so use conservative margins and check the current placement.
+8. **Check transitions and continuity.** Keep screen direction and subject
+   scale coherent between adjacent shots. Preserve safe areas when cutting,
+   reframing, or moving the camera.
+9. **Emit one `video_composition` map per target format.**
 
 ## Output contract
 
 ```json
 {
-  "composition": {
-    "format_id": "ig-portrait",
-    "aspect_ratio": "4:5",
-    "canvas": { "width": 1080, "height": 1350 },
-    "skeleton": "stacked",
-    "bands_pct": { "header": 30, "illustration": 52, "footer": 18 },
-    "focal_point": { "x_pct": 50, "y_pct": 52, "subject": "package passing between hands" },
-    "visual_flow": "headline top-left to subject centre to CTA bottom-left to logo bottom-right",
-    "text_safe_areas": [
-      { "id": "headline", "x_pct": 6, "y_pct": 6, "w_pct": 88, "h_pct": 22, "fill": "lavender", "align": "left" },
-      { "id": "supporting", "x_pct": 6, "y_pct": 84, "w_pct": 60, "h_pct": 8, "fill": "white", "align": "left" },
-      { "id": "cta", "x_pct": 6, "y_pct": 91, "w_pct": 34, "h_pct": 6, "fill": "orange", "align": "center" }
+  "video_composition": {
+    "platform": "Instagram Reels",
+    "format_id": "story-vertical",
+    "aspect_ratio": "9:16",
+    "canvas_target": { "width": 1080, "height": 1920 },
+    "safe_margin_pct": { "top": 12, "right": 7, "bottom": 18, "left": 7 },
+    "platform_ui_zones": [
+      { "id": "top_controls", "edge": "top", "reserved_pct": 12 },
+      { "id": "bottom_controls", "edge": "bottom", "reserved_pct": 15 }
     ],
-    "logo_box": { "x_pct": 74, "y_pct": 91, "w_pct": 20, "h_pct": 6, "variant": "primary-full-colour" },
-    "safe_margin_pct": 6,
-    "edge_protection": "no element within 6% of any edge; 8% at bottom for platform UI",
-    "balance_check": "subject weight left-of-centre, headline weight top-left, logo anchors bottom-right",
-    "illustration_crop_rule": "subject and props fully inside the illustration band; no limb crosses a text-safe area"
+    "persistent_zones": {
+      "caption_safe_area": { "x_pct": 8, "y_pct": 66, "w_pct": 84, "h_pct": 12 },
+      "logo_box": { "x_pct": 8, "y_pct": 54, "w_pct": 22, "h_pct": 8 }
+    },
+    "shot_compositions": [
+      {
+        "shot_id": "s1",
+        "layout": "full-frame-protected",
+        "focal_subject": "shopkeeper preparing the package",
+        "subject_bounds_pct": { "x": 20, "y": 24, "w": 60, "h": 46 },
+        "camera_path": "gentle push-in; stop before entering caption zone",
+        "entry_exit": "no critical action near the crop edges",
+        "transition_continuity": "hold screen direction into s2"
+      }
+    ],
+    "visual_flow": "shopkeeper → package → customer",
+    "crop_protection": "faces, hands, and package remain inside the central safe area"
   }
 }
 ```
 
+Values in the example are starting points, not universal platform guarantees.
+Recalculate for the actual placement, current UI, and creative.
+
+## Platform and format guidance
+
+- **Instagram Reels / Stories:** use 9:16 as the default vertical target; keep
+  key action, captions, CTA, and logo clear of top and bottom controls.
+- **Instagram Feed video:** use 4:5 or 1:1 when selected; recompose the action
+  for the feed crop rather than cropping a Reel master.
+- **LinkedIn feed video:** use 16:9 landscape for a wide scene or 1:1 when the
+  brief calls for a compact feed composition. Use 4:5 only when the selected
+  LinkedIn placement supports it.
+- If a video ships to both platforms, create platform-specific composition
+  maps and verify each in its target player.
+
 ## Quality checklist
 
-- [ ] Skeleton is one of the four defined options.
-- [ ] Header does not exceed 40% of height.
-- [ ] Illustration band is the largest band.
-- [ ] Exactly one focal point, with coordinates.
-- [ ] Visual flow is a single path.
-- [ ] Every text block has a rectangle and a fill token.
-- [ ] No text block overlaps the focal zone.
-- [ ] Logo box is reserved, sized, and variant-matched.
-- [ ] Safe margins respected on all sides.
-- [ ] Layout is recomposed for the ratio, not scaled.
+- [ ] Platform, placement, ratio, and canvas target are explicit.
+- [ ] Every shot has a focal subject and crop-safe bounds.
+- [ ] Important action remains visible throughout camera and subject motion.
+- [ ] Caption, CTA, logo, and UI zones do not overlap one another or the focal
+      action.
+- [ ] Logo placement honors the supplied asset and brand clear space.
+- [ ] Compositions are rebuilt for each aspect ratio, not simply cropped.
+- [ ] Subject scale, screen direction, and safe zones remain coherent between
+      adjacent shots.
+- [ ] Critical content is legible on a phone at feed size.
 
 ## Meelte example
 
-Brief: 16:9 banner for a Meelte retailer campaign, headline "Sell while you sleep", supporting "Orders come in after hours, you fulfil in the morning", CTA "See how it works".
+Brief: 15-second illustrated video for LinkedIn and Instagram: a local
+shopkeeper prepares an order and hands it to a customer.
 
-Map:
-
-- `skeleton: split` — purple left panel 34%, illustration 46% centre, lavender right panel 20%.
-- Headline white on purple, left-aligned, 3 lines max at 10% height each.
-- Focal point at x 52%, y 50% — shopkeeper locking up while a phone glows with new orders.
-- CTA orange pill in the right panel, bottom-aligned.
-- Logo reverse-white, bottom-left on the purple panel, 4% margin.
-- Edge protection: 4% all sides, subject's raised arm kept 8% inside the top edge.
+- **Instagram Reels, 9:16:** frame the shopkeeper and customer in the middle
+  65% of the image; keep the handoff above the caption zone and clear of top
+  and bottom controls.
+- **LinkedIn feed, 16:9:** use a wider shop environment with the handoff near
+  the center; reserve a quiet side panel for a short overlay if copy is
+  supplied.
+- Keep the package handoff visible in every crop. Produce distinct framing and
+  camera paths for the two outputs; do not center-crop the vertical version.
 
 ## Constraints and failure cases
 
 **Never:**
 
-- Scale a square layout to fit another ratio.
-- Put the headline over the illustration without a solid panel.
-- Place the logo over the focal subject.
-- Use more than one focal point.
-- Let a text block touch an edge.
-- Centre everything — it kills hierarchy.
-- Fill empty space with decorative icons.
-
-**Failure cases and responses:**
+- Reuse a still-image band layout without planning the timeline.
+- Scale or crop one platform master if it hides a face, gesture, caption, or
+  logo.
+- Put captions, CTA, logo, or a focal action inside platform UI zones.
+- Move important content through text-safe zones without a planned overlay
+  change.
+- Let a camera move push a face, hand, or prop out of frame.
+- Add decorative icons to fill empty space.
 
 | Situation | Response |
 |---|---|
-| Copy does not fit the band | Cut words; do not shrink type below the size band. |
-| Two elements compete | Reduce contrast or size of the secondary one; move it to a different band. |
-| Layout feels empty | Increase illustration scale or negative space; do not add props. |
-| Subject cropped at edge | Shrink subject 8–10% and re-centre within its band. |
-| 4:5 bottom copy hidden by UI | Raise footer content; increase bottom margin to 8–10%. |
-| Custom ratio requested | Derive from nearest ratio, state the derivation, re-check balance. |
-| Series needs one template | Lock band percentages and text rectangles; vary only illustration and copy. |
+| Subject is cropped during motion | Tighten subject bounds or reduce camera travel |
+| Caption covers the action | Move the caption to its persistent safe zone or revise framing |
+| LinkedIn and Instagram crops conflict | Build separate compositions, not one compromise crop |
+| Video feels static | Improve subject action or camera path with the video director |
+| Copy does not fit | Shorten or reflow approved copy through the strategist; do not shrink it silently |
+| Platform UI changed | Verify the current player and update the placement map |
+
+## References
+
+- `references/aspect-ratios.md` — social-video target formats and re-composition.
+- `references/safe-areas.md` — platform UI zones, captions, logo, and crop safety.
 
 ## Sources
 
-Safe-zone and multi-format band practice adapted from `nextlevelbuilder/ui-ux-pro-max-skill@banner-design`. Proportions derive from `req.txt` §2 layout principles and §3 formats.
+Safe-zone and multi-format practice adapted from
+`nextlevelbuilder/ui-ux-pro-max-skill@banner-design`. Brand constraints derive
+from `brand/meelte-brand.json` and `req.txt` §2–3.

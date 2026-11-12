@@ -16,7 +16,7 @@ Use it when:
 - A previous campaign's language is being reused.
 - Drift is suspected across a set.
 
-Not for: single-asset brand rules (`meelte-brand-system`), single-asset layout (`advertising-layout-composition`), single-asset QA (`image-quality-review`).
+Not for: single-asset brand rules (`meelte-brand-system`), single-video composition (`advertising-layout-composition`), single-video QA (`video-quality-review`).
 
 ## Inputs required
 

@@ -105,6 +105,15 @@ Normalize each request into a VideoBrief that records:
 - Reference assets, logo asset, and continuity references.
 - Style overrides, approval mode, and provider/model target if supplied.
 
+Supported social-video composition targets:
+- Instagram Reels / Stories: 9:16, 1080×1920.
+- Instagram Feed: 4:5, 1080×1350, or 1:1, 1080×1080.
+- LinkedIn feed: 16:9, 1920×1080, or 1:1, 1080×1080.
+- LinkedIn portrait formats only when supported by the selected placement.
+
+These are composition targets, not platform guarantees. Verify the current
+upload/player requirements for each placement before rendering or delivery.
+
 Reasonable defaults when the request does not specify:
 - Platform: Instagram Reels / short-form social.
 - Aspect ratio: 9:16 vertical.
@@ -249,8 +258,9 @@ Required reusable capabilities:
 7. `campaign-series-consistency` — recurring visual language and controlled
    variation across multiple videos.
 
-The video-specific skills may be added as part of a later implementation.
-Do not claim a referenced skill exists until its files are present.
+The video-specific skills are maintained under `.agents/skills/`. Keep these
+contracts aligned with their `SKILL.md` files; do not reference removed
+image-only skills as dependencies.
 
 ===============================================================================
 7. SHARED DATA CONTRACTS
@@ -286,6 +296,7 @@ B. VideoPlan
 - campaign_message
 - visual_concept
 - style_direction
+- video_composition (per target platform / aspect ratio)
 - shot_plan[] (shot id, start/end time, action, framing, camera movement,
   transition, lighting, and continuity notes)
 - audio_plan (optional)
@@ -297,6 +308,7 @@ C. VideoPromptPackage
 - prompt_version
 - main_prompt
 - negative_prompt (optional)
+- video_composition
 - shot_plan
 - target_platform
 - target_duration_seconds

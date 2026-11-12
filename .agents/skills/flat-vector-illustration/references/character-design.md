@@ -1,4 +1,4 @@
-# Character Design — Meelte Flat Vector
+# Character Design and Continuity — Meelte Illustrated Video
 
 ## Proportions
 
@@ -49,8 +49,11 @@ Hands are the highest-risk area in generated illustration.
 
 - Weight on one leg, not both square — gives life without complexity.
 - Shoulders at a slight angle to camera, never fully frontal and never fully profile.
-- One clear action per figure. Two actions read as confusion.
+- One clear action per figure in each beat. Two simultaneous actions read as confusion.
 - Keep silhouettes readable: the pose should be identifiable as a solid black shape.
+- Define a stable start pose and end pose for every animated action.
+- Keep the action small enough that the face, hands, and focal prop stay readable
+  at the target social-video size.
 
 ## Clothing
 
@@ -68,9 +71,9 @@ Clothing is a flat shape with 2–3 internal division lines maximum (collar, sle
 - Skin tones are flat fills from a small warm-neutral set, not gradients.
 - Avoid stereotype markers: no "village" shorthand, no exaggerated accents in dress, no poverty cues unless the brief explicitly calls for them.
 
-## Consistency across a series
+## Consistency across a video and series
 
-Characters in a series must share:
+Characters across shots and campaign videos must share:
 
 1. Head-to-body ratio and head shape family.
 2. Outline weight and colour logic.
@@ -79,6 +82,23 @@ Characters in a series must share:
 5. Shading model — one light direction.
 
 Characters may vary in: age, build, clothing colour, hairstyle, pose, expression.
+
+Within one video, pose and expression may change only as motivated by the shot
+plan. Keep stable identifiers, silhouette, clothing, face construction, and
+palette unchanged across cuts. Use the same character reference in each
+generation when the selected model supports it.
+
+## Motion continuity
+
+- Assign each shot a start state, one primary action, and a clear end state.
+- Keep hands and props attached to their intended characters; simplify or
+  occlude difficult hand-object interactions.
+- Avoid fast reversals, unmotivated turns, teleporting props, and camera moves
+  that change screen direction without a planned cut.
+- Hold non-moving facial features, clothing, and background geometry stable
+  while the planned body or prop action occurs.
+- Use a small amount of idle motion only when it does not compete with the
+  action or make the character jitter.
 
 ## Failure signals
 

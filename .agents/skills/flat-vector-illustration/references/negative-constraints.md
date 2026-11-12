@@ -1,87 +1,75 @@
-# Negative Constraints — Meelte Illustration
+# Video Negative Constraints — Meelte Illustration
 
-Master avoidance list. Copy the relevant subset into every prompt. Never send all of it blindly — pick what the model is likely to do wrong for this brief.
+Select a short, brief-specific subset. Do not send the whole list blindly:
+overlong negatives can drown out the positive motion and style instructions.
 
-## Style negatives (always include)
-
-```
-photorealism, realistic photograph, photo, 3D render, CGI, clay render,
-octane render, ray tracing, plastic sheen, stock photography,
-corporate stock image, generic vector clipart, isometric tech illustration,
-anime, manga, comic book, sketch, pencil drawing, watercolour,
-low-poly, pixel art, voxel, paper cut-out, collage, memphis design
-```
-
-## Rendering negatives (always include)
+## Style negatives
 
 ```
-texture, grain, noise, halftone, paper texture, brush strokes,
-heavy outlines, thick black outlines, cel shading, hard-edged shadows,
-lens flare, bokeh, depth of field, vignette, chromatic aberration,
-glow, bloom, bevel, emboss, drop shadow on text
+photorealism, live action, 3D render, CGI, clay render, plastic sheen,
+stock footage, generic corporate stock, isometric tech illustration,
+anime, manga, sketch, pencil drawing, watercolour, low-poly, voxel,
+collage, unrelated illustration style
 ```
 
-## Character negatives (when people are present)
+## Temporal and continuity negatives
 
 ```
-detailed anatomy, muscular definition, individual fingers, five-finger detail,
-realistic hands, teeth, tongue, individual eyelashes, skin texture, wrinkles,
-nostrils, ear detail, photorealistic face, uncanny face,
-deformed hands, extra fingers, merged limbs, floating limbs,
-duplicate person, cloned faces, distorted proportions
+character redesign, face morphing, wardrobe changes, prop morphing,
+background flicker, palette shift, inconsistent outline weight,
+unmotivated movement, jitter, strobing, ghosting, duplicate subjects,
+teleporting objects, broken screen direction, unplanned camera shake,
+unmotivated cuts, conflicting actions
 ```
 
-## Composition negatives (always include)
+## Rendering negatives
 
 ```
-cluttered background, busy scene, too many objects, multiple focal points,
-centred logo over subject, cramped edges, cropped head, cropped hands,
-text overlays, watermark, signature, border, frame
+texture, grain, noise, halftone, brush strokes, heavy black outlines,
+hard-edged shadows, lens flare, bokeh, depth of field, vignette,
+chromatic aberration, glow, bloom, bevel, plastic gradients
 ```
 
-## Text negatives (always include when text is overlaid)
+## Character negatives
 
 ```
-text, lettering, words, letters, numbers, captions, signage copy,
-labels, logos, brand marks, typography, gibberish text
+detailed anatomy, individual finger detail, realistic hands, teeth, tongue,
+individual eyelashes, skin texture, wrinkles, uncanny face, deformed hands,
+extra fingers, merged or floating limbs, duplicate person, distorted proportions
 ```
 
-Only omit this block when `text_rendering_mode` is `in_image` and the model has been verified for accurate text.
+## Composition and text negatives
+
+```
+cluttered background, too many props, multiple focal points, cramped edges,
+cropped head or hands, unwanted text, captions, subtitles, signage copy,
+watermark, signature, generated logo
+```
+
+Use the no-text and no-logo constraints by default. Exact captions, CTAs, and
+the supplied Meelte logo belong in a deterministic overlay or finishing step,
+not in the video model prompt.
 
 ## Palette negatives
 
 ```
-teal, cyan, turquoise, mint, red, crimson, pink, neon, fluorescent,
-pastel orange, navy, black background, rainbow gradient, iridescent
+teal, cyan, turquoise, mint, red, crimson, neon, fluorescent,
+pastel orange, navy, pure black, rainbow gradient, iridescent
 ```
 
-Add any campaign accent that must not appear.
+Only add exclusions that follow from the brief or the brand system.
 
-## Content negatives (brief-specific)
+## Model adaptation
 
-Derive from the brief's `prohibited_elements`. Typical examples:
-
-```
-alcohol, gambling, religious symbols, currency notes, brand competitor marks,
-real people's likenesses, political imagery, weapons
-```
-
-## Model-specific adaptation
-
-| Model family | Notes |
-|---|---|
-| Natural-language models (Flux, Imagen, GPT-image) | negatives can be a sentence: "Avoid photorealism, 3D rendering, texture, and any text." |
-| Weighted-token models (Midjourney-style) | use `--no` style exclusions; keep the list short, the model over-weights long lists |
-| Negative-prompt field models (SD-style) | full comma list is safe; order by importance |
-| Vector-native models (Recraft-style) | style is a parameter, not a prompt — set the vector style and use negatives only for content |
-
-## Anti-pattern
-
-Do not stack every negative into one enormous block. Over-long negatives cause the model to lose the positive instruction and produce bland output. Rule of thumb: **8–15 negatives**, ordered by likelihood.
+Keep exclusions in a separate negative field only when the selected video
+model supports one. Otherwise, state a concise final sentence in the prompt.
+Provider syntax and supported controls must be verified for the named model.
 
 ## Failure signals
 
-- Image is flat but lifeless — too many style negatives, positive instruction drowned.
-- Text still appears — text negatives missing or model ignores them; switch to overlay mode.
-- Skin looks plastic — "plastic sheen" and "3D render" missing.
-- Background is busy — "cluttered background" and "too many objects" missing.
+- The clip is static or lifeless: reduce negatives that suppress motion and
+  state the intended action positively.
+- Characters drift: strengthen the continuity lock and use approved reference
+  assets when available.
+- The scene flickers: simplify simultaneous movement and background detail.
+- Text appears: state no readable text/captions and move copy to overlays.

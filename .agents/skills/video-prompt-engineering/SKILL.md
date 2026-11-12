@@ -15,6 +15,8 @@ to the video director role, not here.
 ## Inputs
 
 - `VideoBrief` — objective, audience, platform, duration, ratio, exact copy.
+- `video_composition` — target-specific framing, focal bounds, overlays, UI
+  zones, and motion corridors.
 - `shot_plan[]` — time ranges, actions, framing, camera, transitions.
 - `brand_constraints` — palette tokens, type tokens, style lock, logo rules.
 - `caption_plan`, `motion_plan`, `audio_plan` — if the post layer is in scope.
@@ -82,8 +84,9 @@ noise). No claims, no prices, no dialogue the user did not supply.
 
 ### 5. Style lock is quoted, never paraphrased
 
-Copy the illustration description from `flat-vector-illustration` verbatim into
-block 4. Paraphrasing is where drift starts. Reference palette by **token name**
+Copy the canonical video style block from
+`flat-vector-illustration/references/style-lock.md` verbatim into block 4.
+Paraphrasing is where drift starts. Reference palette by **token name**
 ("warm orange, deep purple, soft lavender, charcoal, white"), never by hex —
 hex lives in `brand/meelte-brand.json` and changes there.
 
@@ -122,6 +125,7 @@ whole prompt.
   "prompt_version": "v1",
   "main_prompt": "…",
   "negative_prompt": "…",
+  "video_composition": { "platform": "…", "aspect_ratio": "…", "shot_compositions": [] },
   "shot_plan": [ { "id": "s1", "start": 0.0, "end": 4.0, "action": "…", "framing": "…", "camera": "…", "transition": "…" } ],
   "target_platform": "…",
   "target_duration_seconds": 15,
@@ -165,6 +169,5 @@ whole prompt.
 
 ## Sources
 
-Structure adapted from the project's `image-prompt-engineering` skill, retargeted
-from single-frame to temporal composition; exclusion set and style-lock rule
-from `flat-vector-illustration`; contracts from `req.txt` §7C.
+Structure follows `pipeline.md` and `req.txt` §7C; style-lock rules come from
+`flat-vector-illustration/references/style-lock.md`.

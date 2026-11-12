@@ -64,6 +64,11 @@ In particular, `image-generator` is not a video provider, and the current
 video-specific agents. Do not route a video request through those image-only
 steps or claim that this roster implements video rendering.
 
+The image-only `image-prompt-engineering`, `image-quality-review`, and
+`image-asset-finishing` skills have been removed. Legacy agent files may still
+contain stale references to them; do not invoke those image agents until their
+prompts and handoffs are migrated.
+
 Until those agent files are migrated:
 
 - Follow `pipeline.md` directly for video prompt requests.

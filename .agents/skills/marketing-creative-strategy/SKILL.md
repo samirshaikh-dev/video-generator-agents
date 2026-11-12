@@ -1,6 +1,6 @@
 ---
 name: marketing-creative-strategy
-description: Turn a Meelte image request into one clear marketing message, audience insight, headline, supporting line, and CTA. Use when copy is missing or weak, when a brief is feature-led and needs a benefit-led angle, when deciding message hierarchy for a creative, or when checking that copy makes no unsupported claims. Covers audience-first messaging, benefit-led headlines, short supporting copy, CTA writing, and message hierarchy for image creatives.
+description: Turn a Meelte marketing-video brief into one clear message, audience insight, headline, supporting line, and CTA. Use when copy is missing or weak, a brief is feature-led, or a video needs concise, supportable messaging and a clear message hierarchy.
 ---
 
 # Marketing Creative Strategy
@@ -17,7 +17,7 @@ Use it when:
 - A CTA must be chosen or confirmed.
 - Copy contains claims that need to be verified or removed.
 
-Not for: tone-of-voice rules (`meelte-brand-system`), layout (`advertising-layout-composition`), prompt text (`image-prompt-engineering`).
+Not for: tone-of-voice rules (`meelte-brand-system`), video composition (`advertising-layout-composition`), or temporal prompt construction (`video-prompt-engineering`).
 
 ## Inputs required
 

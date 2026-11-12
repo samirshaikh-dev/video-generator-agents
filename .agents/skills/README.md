@@ -1,116 +1,74 @@
-# Meelte Image-Generation Skills
+# Meelte Video and Creative Skills
 
-Reusable skill modules for the Meelte multi-agent image workflow described in `req.txt`.
+Reusable skill modules for the Meelte video-prompt workflow in
+[`pipeline.md`](../../pipeline.md). Each skill is discovered by its folder and
+contains its own procedure, output contract, checklist, and failure cases.
 
-Each folder is a self-contained skill: a `SKILL.md` with YAML frontmatter (`name`, `description`) plus optional `references/` and `scripts/`. Agents discover them by folder — no registration step, no build.
+## Core workflow skills
 
-The eight agents that consume these skills live in `.opencode/agents/`. See [`AGENTS.md`](../../AGENTS.md) for the roster, handoff map, and permission model.
-
-## Skills
-
-| Skill | Owns | Output contract |
+| Skill | Owns | Output |
 |---|---|---|
-| [`meelte-brand-system`](meelte-brand-system/SKILL.md) | palette, typography, tone, logo, approved/banned treatments | `brand_constraints`, `brand_compliance_checklist`, `conflicts` |
-| [`flat-vector-illustration`](flat-vector-illustration/SKILL.md) | character design, environment, props, rendering rules, style lock | `illustration_spec` |
-| [`marketing-creative-strategy`](marketing-creative-strategy/SKILL.md) | audience, insight, message hierarchy, headline, supporting, CTA | `campaign_message` |
-| [`advertising-layout-composition`](advertising-layout-composition/SKILL.md) | bands, focal point, text-safe areas, logo box, margins | `composition` |
-| [`image-prompt-engineering`](image-prompt-engineering/SKILL.md) | positive/negative prompts, model adapters, versioning | `image_prompt` |
-| [`image-quality-review`](image-quality-review/SKILL.md) | scoring, severity, verdict, targeted revisions | `quality_review` |
-| [`video-prompt-engineering`](video-prompt-engineering/SKILL.md) | temporal prompt structure, camera, continuity, negatives, versioning | `VideoPromptPackage` |
-| [`video-quality-review`](video-quality-review/SKILL.md) | prompt review always, rendered-video review when an asset exists | `QualityReview` |
-| [`image-asset-finishing`](image-asset-finishing/SKILL.md) | overlays, resize/pad, export, naming, metadata | `final_deliverable` |
-| [`campaign-series-consistency`](campaign-series-consistency/SKILL.md) | lock set, variation set, sequence, drift control | `series` |
+| [`meelte-brand-system`](meelte-brand-system/SKILL.md) | Brand palette, typography, tone, logo, and constraints | `brand_constraints` |
+| [`marketing-creative-strategy`](marketing-creative-strategy/SKILL.md) | Audience insight, message, copy, and claims | `campaign_message` |
+| [`advertising-layout-composition`](advertising-layout-composition/SKILL.md) | Video framing, social ratios, safe areas, shot composition | `video_composition` |
+| [`flat-vector-illustration`](flat-vector-illustration/SKILL.md) | Illustrated character/prop design, motion bounds, continuity | `illustration_spec` |
+| [`video-prompt-engineering`](video-prompt-engineering/SKILL.md) | Time-aware provider-neutral prompt, negatives, model notes | `VideoPromptPackage` |
+| [`video-quality-review`](video-quality-review/SKILL.md) | Prompt QA; rendered-video QA only when a real asset exists | `QualityReview` |
+| [`campaign-series-consistency`](campaign-series-consistency/SKILL.md) | Shared style and controlled variation across a video series | `series` |
 
-### Post-production skills
+Image-only prompt authoring, image quality review, and image asset finishing
+skills have been removed. Do not treat the legacy image-specific OpenCode agent
+files as video-capable.
 
-Loaded only when finishing a rendered asset, never for prompt authoring:
+## Optional post-production skills
+
+Use only when a rendered asset exists or the user explicitly requests
+post-production. They are not required to create a prompt package.
 
 | Skill | Owns |
 |---|---|
-| [`remotion-motion-graphics`](remotion-motion-graphics/SKILL.md) | kinetic type, lower thirds, callouts, transition sweeps |
-| [`caption-animation`](caption-animation/SKILL.md) | word-level animated captions, 9:16 safe area |
-| [`ffmpeg-captions-subtitles`](ffmpeg-captions-subtitles/SKILL.md) | SRT/ASS burn-in on a generated clip |
-| [`sound-design-film`](sound-design-film/SKILL.md) | SFX cue design, layering, music/VO balance |
-| [`video-editing`](video-editing/SKILL.md) | assembly, concat, aspect reframe, mux |
+| [`remotion-motion-graphics`](remotion-motion-graphics/SKILL.md) | Programmatic motion graphics and composition |
+| [`caption-animation`](caption-animation/SKILL.md) | Word-level animated captions and safe placement |
+| [`ffmpeg-captions-subtitles`](ffmpeg-captions-subtitles/SKILL.md) | Subtitle conversion and burn-in |
+| [`sound-design-film`](sound-design-film/SKILL.md) | SFX, music, voice, and audio layering |
+| [`video-editing`](video-editing/SKILL.md) | Assembly, cuts, reframing, and muxing |
 
-`find-skills` is also installed — it is a general discovery helper, not part of the Meelte workflow.
+`find-skills` is a general discovery helper, not part of the Meelte workflow.
 
 ## Shared configuration
 
-`brand/meelte-brand.json` is the single source of truth for palette, typography, logo rules, illustration direction, formats, layout, and copy limits.
+`brand/meelte-brand.json` is the source of truth for brand rules and existing
+format targets. Skills read it; do not copy palette values into prompt
+templates. Provider constraints belong in a named model adapter or documented
+assumption, never in the provider-neutral creative contract.
 
-Skills **read** it and reference tokens by name. Never copy a hex value into a prompt or a skill file — change the JSON and every skill follows.
-
-## Workflow order
+## Workflow
 
 ```
-brief
-  -> meelte-brand-system          (constraints + conflicts)
-  -> marketing-creative-strategy  (message + copy)
-  -> advertising-layout-composition (composition map)
-  -> flat-vector-illustration     (illustration spec)
-  -> image-prompt-engineering     (prompt + negatives)
-  -> [image generation - provider adapter]
-  -> image-quality-review         (verdict + targeted revisions)
-  -> image-asset-finishing        (overlay, export, metadata)
-  -> campaign-series-consistency  (lock set + ledger, for multi-asset work)
+VideoBrief
+  -> meelte-brand-system             (constraints and conflicts)
+  -> marketing-creative-strategy     (message and approved copy)
+  -> video director / shot plan      (timing, action, camera, continuity)
+  -> advertising-layout-composition  (platform-specific video composition)
+  -> flat-vector-illustration        (visual and motion continuity)
+  -> video-prompt-engineering        (provider-neutral prompt)
+  -> video-quality-review            (prompt gate)
+  -> optional provider generation    (only when configured and requested)
+  -> optional post-production        (only with a rendered asset)
 ```
 
-`campaign-series-consistency` wraps the whole chain when more than one asset ships from a brief.
+Video director and provider roles are workflow responsibilities; an
+OpenCode agent is not implemented merely because the role appears in this map.
 
 ## Adding a skill
 
 1. Create `.agents/skills/<kebab-case-name>/SKILL.md`.
-2. Add frontmatter with `name` and a `description` that lists the trigger conditions — this is what the agent matches against.
-3. Include: purpose and when to use, inputs, procedure, output contract, quality checklist, Meelte example, constraints and failure cases.
-4. Put long tables in `references/`, deterministic tooling in `scripts/`.
-5. Add a row to the table above.
+2. Add frontmatter with `name` and a trigger-oriented `description`.
+3. Include purpose, inputs, procedure, output contract, checklist, examples,
+   constraints, and failure cases.
+4. Put detailed references in `references/` and deterministic tooling in
+   `scripts/`.
+5. Add the skill to the appropriate table above.
 
-Do not create an empty skill folder. A skill with placeholder instructions is worse than no skill, because it looks authoritative.
-
-## Adding an image provider
-
-Provider code belongs behind an adapter, not in a skill. The contract a provider must satisfy:
-
-```json
-{
-  "request_id": "…",
-  "provider": "…",
-  "model": "…",
-  "image_asset_reference": "…",
-  "prompt_version": "…",
-  "generation_parameters": {},
-  "created_at": "…",
-  "status": "succeeded | failed",
-  "error": null
-}
-```
-
-`image-prompt-engineering/references/model-adapters.md` documents the prompt-structure differences per model family. Add a new adapter row there when adding a provider.
-
-## Reference sources
-
-These upstream skills informed the Meelte versions. They are **cited, not installed** — the content that mattered was adapted into the skills above, so there is no runtime dependency and no duplicate source of truth. Install any of them if you want to consult the originals:
-
-| Skill | Used for |
-|---|---|
-| `coreyhaines31/marketingskills@image` | platform dimensions, image optimisation |
-| `coreyhaines31/marketingskills@marketing-psychology` | audience-first framing |
-| `nextlevelbuilder/ui-ux-pro-max-skill@banner-design` | safe zones, multi-format bands |
-| `omer-metin/skills-for-antigravity@art-consistency` | style lock, drift control |
-| `openai/skills@imagegen` | prompt structure, model behaviour |
-
-Each Meelte skill credits what it adapted in a `Sources` section.
-
-`find-skills` (`vercel-labs/skills`) is installed separately — it is a general discovery helper, not part of the Meelte workflow.
-
-### Tracking
-
-Hand-authored skills have no upstream repository, so they show as `Source: untracked` in `npx skills list` and do not appear in `skills-lock.json`. That is expected. If you want them versioned and installable by teammates, push `.agents/skills/` and `brand/` to a repo and use `npx skills add <owner>/<repo>`.
-
-## Conventions
-
-- Frontmatter `description` is a trigger list, not a summary. Write it for the agent choosing whether to load the skill.
-- Output contracts mirror `req.txt` §7 schemas so agents pass validated objects, not prose.
-- Every skill ends with failure cases. A skill without failure cases has not been thought through.
-- British/Indian English spelling in copy examples (`catalogue`, `colour`), per `marketing-creative-strategy/references/copy-rules.md`.
+Do not create empty skill folders or claim a skill exists before its files are
+present.

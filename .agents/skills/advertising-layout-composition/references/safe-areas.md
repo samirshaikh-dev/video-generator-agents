@@ -1,94 +1,70 @@
-# Safe Areas — Reference
+# Social Video Safe Areas — Reference
+
+Platform UI and safe zones vary by placement, device, and product updates.
+These are conservative composition guides, not official platform guarantees.
+Check the current player before final delivery.
 
 ## Definitions
 
 | Term | Meaning |
 |---|---|
-| **Trim edge** | the canvas boundary |
-| **Safe margin** | the distance from the edge inside which nothing important may sit |
-| **Text-safe area** | a rectangle reserved for copy, filled with a solid token |
-| **Logo box** | a reserved rectangle including clear space |
-| **Platform UI zone** | an area a social platform overlays with its own chrome |
+| **Canvas edge** | The boundary of the encoded frame |
+| **Action-safe area** | Region where faces, hands, and key props remain visible |
+| **Caption-safe area** | Stable region reserved for subtitles or supplied copy |
+| **Logo box** | Reserved region including the supplied asset's clear space |
+| **Platform UI zone** | Region that may be covered by player controls or feed chrome |
+| **Motion corridor** | Path a character, prop, or camera may travel without crossing protected zones |
 
-## Safe margins by format
+## Conservative UI clearances
 
-| Format | Margin | Bottom extra |
-|---|---|---|
-| 1:1 | 6% | 0 |
-| 4:5 | 6% | +2% |
-| 16:9 | 4% | 0 |
-| 9:16 | 8% | +7% (platform UI) |
-
-On a 1080px canvas, 6% = 65px.
-
-## Platform UI zones
-
-| Platform placement | Reserved |
+| Placement | Keep clear |
 |---|---|
-| Instagram feed (1:1, 4:5) | bottom 2% only; keep CTA above it |
-| Instagram Story / Reel (9:16) | top 12% (profile row), bottom 15% (reply bar, actions) |
-| Facebook feed | bottom 5% |
-| LinkedIn feed | bottom 5% |
-| Website hero | no UI zone, but respect 4% margin |
-| Display ad | 2% margin, plus a 40px border-safe inset |
+| Instagram Reels / Stories (9:16) | Top 12% and bottom 15% for player UI; keep critical action and overlays clear |
+| Instagram feed (1:1, 4:5) | Keep critical copy and CTA away from the bottom edge and controls |
+| LinkedIn feed video | Keep critical copy and CTA away from player controls and the bottom edge |
 
-Never place the logo, CTA, or a price inside a platform UI zone.
+Do not treat these percentages as fixed platform specifications. Verify the
+target player and device. Place important elements inside conservative margins
+even when the preview appears unobstructed.
 
-## Text-safe rectangles
+## Video-safe composition rules
 
-Rules:
+1. Keep faces, hands, focal props, captions, CTAs, and logo inside the
+   action-safe region for the full shot, not just its first frame.
+2. Define caption and logo areas once, then preserve them across shots where
+   practical.
+3. Do not route a character, prop, or camera move through a caption area unless
+   the overlay intentionally moves or is hidden for that beat.
+4. Leave enough contrast behind captions; use a solid brand-token panel or a
+   restrained scrim when needed.
+5. Keep logo clear space around the supplied asset; omit or mark `logo pending`
+   when no approved logo file is supplied.
+6. Re-check every target aspect ratio independently; a safe 16:9 layout may
+   become unsafe in 9:16 or 1:1.
+7. Check text size at phone/feed scale, not only at full resolution.
 
-1. One rectangle per text block. No sharing.
-2. Fill must be a solid token: lavender, white, purple, or charcoal. No transparency below 85%.
-3. Rectangles may not overlap the focal zone (a circle of roughly 30% of the canvas around the focal point).
-4. Padding inside a rectangle: at least 1.5× the body text size.
-5. Rounded corners are allowed at 8–16px on 1080; sharp corners on banners.
-6. No text rectangle may touch the trim edge.
+## Suggested placement strategy
 
-## Logo box
+- **9:16:** reserve the top and bottom UI bands; place the primary action and
+  any overlay in the central area.
+- **4:5:** preserve room below the action for captions while keeping the main
+  subject centered vertically.
+- **1:1:** keep the focal subject and captions compact, with margins on all
+  four sides.
+- **16:9:** reserve side negative space for optional copy; keep the focal
+  action away from lateral crop edges.
 
-Size: 13–15% of canvas width for full lockup; 6–8% for mark-only.
+## Review
 
-Clear space: 0.5 × logo height on all sides, included in the reserved box.
-
-Positions:
-
-| Format | Preferred | Fallback |
-|---|---|---|
-| 1:1 | footer-left | footer-right |
-| 4:5 | footer-left | footer-right |
-| 16:9 | bottom-left on text panel | top-left on clean band |
-| 9:16 | footer, above UI zone | omit |
-
-## Edge protection for illustration
-
-- No character's head within 5% of the top edge.
-- No hand or prop within 4% of a side edge.
-- No important object may be cropped by the frame.
-- Background shapes may bleed to the edge; subjects may not.
-
-## Overlay and scrim
-
-When text must sit on the illustration:
-
-1. Add a solid panel at 90%+ opacity, or
-2. Add a gradient scrim from the text side at 85% opacity to transparent.
-
-Never use a scrim on a light illustration with dark text — the result is muddy. Use a solid panel instead.
-
-## Checking
-
-Measure, don't eyeball:
-
-1. Convert percentages to pixels for the target canvas.
-2. Draw the text rectangles and logo box as outlines on a copy.
-3. Verify no element crosses a boundary.
-4. Verify the smallest text is still legible at 30% scale.
+1. Overlay a guide for UI zones, caption area, logo box, and subject bounds.
+2. Inspect keyframes during motion, including entry, peak action, and exit.
+3. Confirm no face, hand, prop, caption, or logo enters a covered area.
+4. Repeat for each platform and aspect ratio.
 
 ## Failure signals
 
-- CTA half-hidden by a platform bar — UI zone ignored.
-- Headline touches the edge — margin ignored.
-- Logo inside the clear-space of the headline — box not reserved.
-- Text sits directly on a character's face — text-safe area not defined.
-- Different margins on left and right — composition not measured.
+- The CTA or captions are hidden by player controls.
+- A subject begins in frame but exits the crop during camera movement.
+- Captions cover a face, handoff, or other key action.
+- The logo lacks clear space or competes with the focal subject.
+- A layout is checked only as a still and misses unsafe motion between frames.

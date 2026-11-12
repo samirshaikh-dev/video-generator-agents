@@ -93,6 +93,11 @@ must not be described as a working video-generation implementation. For a
 video request, follow `pipeline.md` and use the video-specific skills; do not
 route the request through image-only generation or finishing steps.
 
+The image-only `image-prompt-engineering`, `image-quality-review`, and
+`image-asset-finishing` skills were removed. Some legacy OpenCode agent files
+still reference them; do not use those image agents until their prompts and
+handoffs have been migrated.
+
 No video provider adapter is configured. If no authorized video tool is
 available, return the prompt package and state plainly that no video was
 rendered. Never fabricate a generation result, asset path, or QA pass.
