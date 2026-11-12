@@ -1,4 +1,4 @@
-# Meelte Typography — Direction Reference
+# meelTe Typography — Direction Reference
 
 Preferred families: **Poppins**, **Manrope**, **Plus Jakarta Sans**. Pick one per creative.
 
@@ -51,7 +51,7 @@ On a 1080px square that puts the headline around 86–119px. If the headline nee
 | `in_image` | only when the model is verified to render accurately, and copy is short | misspellings, warped glyphs |
 | `mixed` | model renders a large decorative word; overlay carries the precise copy | misalignment between the two |
 
-**Rule:** the brand name, any price, any date, and any legal or offer text are always overlaid deterministically. Never accept a generated misspelling of "Meelte".
+**Rule:** the brand name, any price, any date, and any legal or offer text are always overlaid deterministically. Never accept a generated misspelling of "meelTe".
 
 ## Text-safe area practice
 

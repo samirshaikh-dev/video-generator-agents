@@ -1,4 +1,4 @@
-# Meelte Brand — Do / Don't Examples
+# meelTe Brand — Do / Don't Examples
 
 Each pair is a real decision an agent will face. The failure is named so it can be caught in QA.
 
@@ -7,7 +7,7 @@ Each pair is a real decision an agent will face. The failure is named so it can 
 **Do:** purple headline panel with an orange focal accent; lavender field behind.
 **Don't:** all-orange creative with purple used as a small dot in a corner.
 
-*Failure:* purple demoted to decoration. The brand reads as "orange brand", not Meelte.
+*Failure:* purple demoted to decoration. The brand reads as "orange brand", not meelTe.
 
 ## 2. Illustration style
 
@@ -26,7 +26,7 @@ Each pair is a real decision an agent will face. The failure is named so it can 
 ## 4. Headline length
 
 **Do:** "Sell more, stress less."
-**Don't:** "Discover how Meelte's integrated commerce platform helps local retailers unlock growth."
+**Don't:** "Discover how meelTe's integrated commerce platform helps local retailers unlock growth."
 
 *Failure:* headline is a paragraph. Six words maximum; the second version is a supporting line at best.
 
@@ -70,7 +70,7 @@ Each pair is a real decision an agent will face. The failure is named so it can 
 **Do:** "Your shop, open to the whole neighbourhood."
 **Don't:** "Leverage omnichannel commerce to optimise your retail footprint."
 
-*Failure:* enterprise jargon. Meelte speaks to the owner, not to a procurement team.
+*Failure:* enterprise jargon. meelTe speaks to the owner, not to a procurement team.
 
 ## 11. Festival treatment
 
@@ -93,5 +93,5 @@ Before shipping, ask:
 1. Squint — are orange and purple both still present?
 2. Is there exactly one focal point?
 3. Would a stranger read the message in under three seconds?
-4. Is every word spelled correctly, especially "Meelte"?
+4. Is every word spelled correctly, especially "meelTe"?
 5. Is every number and claim traceable to the brief?

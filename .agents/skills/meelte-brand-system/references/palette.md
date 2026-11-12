@@ -1,4 +1,4 @@
-# Meelte Palette — Usage Reference
+# meelTe Palette — Usage Reference
 
 Token names come from `brand/meelte-brand.json`. Never hardcode a hex outside this file.
 

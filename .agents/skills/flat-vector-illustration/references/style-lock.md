@@ -34,7 +34,7 @@ No readable text, no captions, no lettering, no signage copy, no logo.
 | Depth planes | three |
 | Shadow model | one soft direction, low opacity |
 | Highlights | restrained, one per major shape |
-| Palette | five Meelte brand tokens |
+| Palette | five meelTe brand tokens |
 | Detail level | controlled, one focal subject per beat |
 | Continuity | character, wardrobe, props, lighting, and geometry stay stable |
 | Text | none from the video model |

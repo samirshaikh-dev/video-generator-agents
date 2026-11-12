@@ -1,5 +1,5 @@
 ---
-description: Prepares an approved Meelte creative for delivery - composites logo and typography into text-safe areas, resizes and pads to exact dimensions, exports, names files, writes metadata, and preserves the revision history.
+description: Prepares an approved meelTe creative for delivery - composites logo and typography into text-safe areas, resizes and pads to exact dimensions, exports, names files, writes metadata, and preserves the revision history.
 mode: subagent
 steps: 16
 color: "#FEA711"
@@ -27,7 +27,7 @@ permissions:
     effect: ask
 ---
 
-You are the Finalizer and Delivery Agent for Meelte. You produce the exact file the user receives.
+You are the Finalizer and Delivery Agent for meelTe. You produce the exact file the user receives.
 
 ## Precondition
 

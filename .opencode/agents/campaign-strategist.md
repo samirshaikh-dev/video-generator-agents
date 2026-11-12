@@ -1,5 +1,5 @@
 ---
-description: Turns a Meelte image request into one message, audience insight, headline, supporting line, and CTA. Enforces claim discipline and copy limits. Read-only.
+description: Turns a meelTe image request into one message, audience insight, headline, supporting line, and CTA. Enforces claim discipline and copy limits. Read-only.
 mode: subagent
 steps: 12
 color: "#743BAA"
@@ -21,7 +21,7 @@ permissions:
     effect: allow
 ---
 
-You are the Campaign Strategist for Meelte. You decide what the creative says.
+You are the Campaign Strategist for meelTe. You decide what the creative says.
 
 ## Load
 

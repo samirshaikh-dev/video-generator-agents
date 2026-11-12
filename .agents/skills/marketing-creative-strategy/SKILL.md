@@ -1,6 +1,6 @@
 ---
 name: marketing-creative-strategy
-description: Turn a Meelte marketing-video brief into one clear message, audience insight, headline, supporting line, and CTA. Use when copy is missing or weak, a brief is feature-led, or a video needs concise, supportable messaging and a clear message hierarchy.
+description: Turn a meelTe marketing-video brief into one clear message, audience insight, headline, supporting line, and CTA. Use when copy is missing or weak, a brief is feature-led, or a video needs concise, supportable messaging and a clear message hierarchy.
 ---
 
 # Marketing Creative Strategy
@@ -60,7 +60,7 @@ Not for: tone-of-voice rules (`meelte-brand-system`), video composition (`advert
 ```json
 {
   "campaign_message": {
-    "objective": "Get kirana store owners to publish their catalogue on Meelte before Diwali",
+    "objective": "Get kirana store owners to publish their catalogue on meelTe before Diwali",
     "outcome": "more walk-in customers ordering ahead",
     "audience": {
       "who": "independent kirana owners in Bengaluru, 30-50, smartphone-first",
@@ -107,7 +107,7 @@ Not for: tone-of-voice rules (`meelte-brand-system`), video composition (`advert
 - [ ] Headline passes the three-second test.
 - [ ] Supplied approved copy was not silently rewritten.
 
-## Meelte example
+## meelTe example
 
 Brief: "Make a post for our new catalogue feature for small shops."
 

@@ -1,14 +1,14 @@
-MEELTE MULTI-AGENT VIDEO PROMPT SYSTEM
+meelTe MULTI-AGENT VIDEO PROMPT SYSTEM
 PROJECT REQUIREMENTS
 File: req.txt
-Purpose: Define a reusable workflow that turns a Meelte campaign brief into a
+Purpose: Define a reusable workflow that turns a meelTe campaign brief into a
 structured, brand-safe, model-ready text-to-video prompt package.
 
 ===============================================================================
 1. PROJECT OBJECTIVE AND SCOPE
 ===============================================================================
 
-Build a reusable multi-agent system for planning short Meelte marketing videos
+Build a reusable multi-agent system for planning short meelTe marketing videos
 and authoring prompts for text-to-video models. The workflow turns a rough
 request into a grounded creative plan, a time-aware video prompt, and a
 reviewable delivery package.
@@ -20,7 +20,7 @@ use the approved prompt, but the workflow must never claim a video was
 generated unless a real provider call returned an asset.
 
 The system must:
-- Preserve Meelte's visual identity and factual accuracy across campaigns.
+- Preserve meelTe's visual identity and factual accuracy across campaigns.
 - Translate short or incomplete briefs into a clear video concept.
 - Specify what happens over time, not just describe a still frame.
 - Produce provider-neutral prompts that can be adapted to a selected model
@@ -35,7 +35,7 @@ Out of scope for this documentation change:
 - Requiring a specific video model, API, framework, or agent library.
 
 ===============================================================================
-2. MEELTE BRAND AND VIDEO STYLE
+2. meelTe BRAND AND VIDEO STYLE
 ===============================================================================
 
 Read `brand/meelte-brand.json` for the canonical palette, typography, logo,
@@ -376,7 +376,7 @@ The user should be able to:
 ===============================================================================
 
 Maintain a source of truth for:
-- Meelte logo and approved variants.
+- meelTe logo and approved variants.
 - Brand palette, typography references, and style-guide images.
 - Approved campaign examples, motion references, and reusable characters.
 - Platform format targets and any provider-specific constraints.
@@ -395,13 +395,13 @@ Requirements:
 ===============================================================================
 
 The prompt workflow is acceptable when:
-- A natural-language Meelte request produces a structured VideoBrief.
+- A natural-language meelTe request produces a structured VideoBrief.
 - The handoffs produce a traceable message, video concept, shot plan, prompt,
   and QA result.
 - The prompt describes temporal actions and camera direction, not only a
   static frame.
 - Shot timings add up to the requested duration, and continuity is explicit.
-- The prompt follows Meelte's style and brand constraints unless the user
+- The prompt follows meelTe's style and brand constraints unless the user
   explicitly approved a recorded override.
 - Exact user-supplied copy is preserved, and no unsupported claims are added.
 - The prompt is provider-neutral unless a target model was specified.
@@ -463,7 +463,7 @@ For the prompt-workflow documentation:
 2. Updated provider-neutral project requirements and handoff contracts.
 3. Clear distinction between prompt-package delivery and optional video
    generation.
-4. Documented Meelte brand, temporal planning, continuity, and QA gates.
+4. Documented meelTe brand, temporal planning, continuity, and QA gates.
 
 For a future implementation phase, as approved:
 - Specialist video agents/skills, schemas, orchestrator, optional provider

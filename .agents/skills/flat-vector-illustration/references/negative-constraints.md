@@ -1,4 +1,4 @@
-# Video Negative Constraints — Meelte Illustration
+# Video Negative Constraints — meelTe Illustration
 
 Select a short, brief-specific subset. Do not send the whole list blindly:
 overlong negatives can drown out the positive motion and style instructions.
@@ -47,7 +47,7 @@ watermark, signature, generated logo
 ```
 
 Use the no-text and no-logo constraints by default. Exact captions, CTAs, and
-the supplied Meelte logo belong in a deterministic overlay or finishing step,
+the supplied meelTe logo belong in a deterministic overlay or finishing step,
 not in the video model prompt.
 
 ## Palette negatives

@@ -1,6 +1,6 @@
-# Meelte Video Prompt Pipeline
+# meelTe Video Prompt Pipeline
 
-The portable workflow for turning a Meelte marketing request into a
+The portable workflow for turning a meelTe marketing request into a
 brand-safe, time-aware prompt for a text-to-video model. Any agent or host with
 file access can follow it. A video-generation tool is optional; the default
 deliverable is the prompt package, not a rendered video.
@@ -18,7 +18,7 @@ rough brief → normalize → load brand → plan message and story → write pr
 1. **Never invent campaign facts.** Do not add prices, discounts, deadlines,
    statistics, guarantees, testimonials, product capabilities, or claims the
    user did not supply.
-2. **Never fabricate the Meelte logo.** Use only a supplied approved asset.
+2. **Never fabricate the meelTe logo.** Use only a supplied approved asset.
    Without one, reserve a clean zone and mark `logo pending`.
 3. **Never change approved copy silently.** Preserve exact user-supplied text.
 4. **Never claim a video exists unless it was actually generated.** A prompt
@@ -86,7 +86,7 @@ Read only what the request needs. Skills live in `.agents/skills/<name>/SKILL.md
 
 | If the request involves | Read |
 |---|---|
-| any Meelte video | `meelte-brand-system/SKILL.md` |
+| any meelTe video | `meelte-brand-system/SKILL.md` |
 | visual characters or illustrated scenes | `flat-vector-illustration/SKILL.md` and its style-lock reference |
 | headline, CTA, offer, or claim | `marketing-creative-strategy/SKILL.md` |
 | framing, aspect ratio, text-safe areas | `advertising-layout-composition/SKILL.md` |
@@ -161,7 +161,7 @@ Do not hand off the prompt until every applicable check passes:
 - [ ] Orange and purple remain the dominant brand pair.
 - [ ] No unsupported claim, price, offer, deadline, statistic, or capability.
 - [ ] Every quoted text string came from the user and is spelled exactly.
-- [ ] No instruction to generate or approximate the Meelte logo.
+- [ ] No instruction to generate or approximate the meelTe logo.
 - [ ] Audio is included only when requested or supplied.
 - [ ] Provider-specific behavior is not promised without a named, verified model.
 - [ ] The deliverable is labeled as a prompt package unless a video was
@@ -201,7 +201,7 @@ No provider adapter is required by this prompt workflow.
 - Actions, timing, camera, and transitions are specific enough to guide a
   video model without overloading a shot.
 - Characters and visual details remain consistent across the timeline.
-- Meelte palette, tone, and default 2D style are respected.
+- meelTe palette, tone, and default 2D style are respected.
 - Exact supplied copy is accurate; invented copy and claims are absent.
 - Text and logo are assigned to a reliable overlay/asset path or marked
   pending.
@@ -266,7 +266,7 @@ What to report:
 
 **Request:**
 
-> Make a 15-second vertical Meelte Reel for local shopkeepers. Show a shop owner
+> Make a 15-second vertical meelTe Reel for local shopkeepers. Show a shop owner
 > preparing an order and handing it to a customer. Use our friendly illustrated
 > brand style. No dialogue or offer.
 

@@ -1,6 +1,6 @@
 ---
 name: flat-vector-illustration
-description: Define Meelte's polished 2D flat-vector look for illustrated social videos. Use for character and prop design, animated poses, motion limits, visual continuity, scene depth, and style drift across shots or versions for LinkedIn and Instagram. Does not own story timing, framing, copy, or final video prompting.
+description: Define meelTe's polished 2D flat-vector look for illustrated social videos. Use for character and prop design, animated poses, motion limits, visual continuity, scene depth, and style drift across shots or versions for LinkedIn and Instagram. Does not own story timing, framing, copy, or final video prompting.
 ---
 
 # Flat Vector Illustration for Video
@@ -8,7 +8,7 @@ description: Define Meelte's polished 2D flat-vector look for illustrated social
 ## Purpose
 
 Define how characters, props, and environments look and move in an illustrated
-video. Preserve Meelte's recognizable 2D commercial vector style from the first
+video. Preserve meelTe's recognizable 2D commercial vector style from the first
 frame to the last. This skill owns the visual treatment and continuity, not the
 story, layout, or final text-to-video prompt.
 
@@ -139,7 +139,7 @@ safe areas (`advertising-layout-composition`), message and copy
 - [ ] Negative constraints target likely video artifacts without overwhelming
       the positive direction.
 
-## Meelte example
+## meelTe example
 
 Brief: 15-second illustrated Instagram Reel; a shopkeeper prepares an order and
 hands it to a customer; no dialogue or offer.

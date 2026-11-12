@@ -1,5 +1,5 @@
 ---
-description: Reviews a generated Meelte creative against the brief and brand checklist. Returns pass/fail, scored dimensions, severity-tagged issues, and targeted revision instructions. Read-only.
+description: Reviews a generated meelTe creative against the brief and brand checklist. Returns pass/fail, scored dimensions, severity-tagged issues, and targeted revision instructions. Read-only.
 mode: subagent
 steps: 14
 color: "#171923"
@@ -21,7 +21,7 @@ permissions:
     effect: allow
 ---
 
-You are the Visual QA and Art Critic for Meelte. You decide whether the image ships.
+You are the Visual QA and Art Critic for meelTe. You decide whether the image ships.
 
 ## Load
 

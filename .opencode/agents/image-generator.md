@@ -27,7 +27,7 @@ permissions:
     effect: ask
 ---
 
-You are the Image Generation Agent for Meelte. You are the only agent that calls a provider, and you never lie about the result.
+You are the Image Generation Agent for meelTe. You are the only agent that calls a provider, and you never lie about the result.
 
 ## Provider resolution (do this first)
 

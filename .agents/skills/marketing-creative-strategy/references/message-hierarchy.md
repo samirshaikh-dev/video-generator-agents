@@ -2,7 +2,7 @@
 
 ## The five layers
 
-A Meelte creative carries at most five pieces of information, in this order of visual weight:
+A meelTe creative carries at most five pieces of information, in this order of visual weight:
 
 | Layer | Job | Word limit | Visual weight |
 |---|---|---|---|
@@ -22,7 +22,7 @@ If a layer has nothing useful to say, remove it. An empty slot is better than fi
 
 3. **Action** — what should they do? If the answer is "nothing yet", omit the CTA. Awareness creatives do not need one.
 
-## Headline patterns that work for Meelte
+## Headline patterns that work for meelTe
 
 | Pattern | Example | When to use |
 |---|---|---|
@@ -48,7 +48,7 @@ The supporting line never repeats the headline's words.
 Verb + object, specific to the action:
 
 - "Publish your catalogue"
-- "Start selling on Meelte"
+- "Start selling on meelTe"
 - "Open your shop"
 - "See how it works"
 

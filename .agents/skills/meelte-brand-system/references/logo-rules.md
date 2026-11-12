@@ -1,4 +1,4 @@
-# Meelte Logo — Handling Reference
+# meelTe Logo — Handling Reference
 
 ## Variant selection
 

@@ -1,13 +1,13 @@
 ---
 name: meelte-brand-system
-description: Canonical Meelte brand rules for any image, creative, ad, or campaign asset. Use when applying Meelte colours, typography, tone of voice, logo placement, or illustration direction; when checking whether a creative is on-brand; when a request conflicts with brand rules; or when another agent needs the brand constraint set before art direction or prompt writing. Covers palette tokens, type hierarchy, logo clear-space, approved and banned visual treatments, and the brand-compliance checklist.
+description: Canonical meelTe brand rules for any image, creative, ad, or campaign asset. Use when applying meelTe colours, typography, tone of voice, logo placement, or illustration direction; when checking whether a creative is on-brand; when a request conflicts with brand rules; or when another agent needs the brand constraint set before art direction or prompt writing. Covers palette tokens, type hierarchy, logo clear-space, approved and banned visual treatments, and the brand-compliance checklist.
 ---
 
-# Meelte Brand System
+# meelTe Brand System
 
 ## Purpose
 
-Hold the single authoritative definition of Meelte's visual and verbal identity, and turn it into machine-usable constraints that every other agent can consume. This skill is the Brand Guardian's working manual.
+Hold the single authoritative definition of meelTe's visual and verbal identity, and turn it into machine-usable constraints that every other agent can consume. This skill is the Brand Guardian's working manual.
 
 Use it when:
 
@@ -109,7 +109,7 @@ Supporting detail lives in:
       { "id": "B3", "check": "Flat-vector illustration style, no photorealism or 3D", "severity": "critical" },
       { "id": "B4", "check": "Headline <= 6 words, supporting <= 14 words", "severity": "major" },
       { "id": "B5", "check": "Logo variant matches background and respects clear-space", "severity": "critical" },
-      { "id": "B6", "check": "Brand name spelled 'Meelte'", "severity": "critical" },
+      { "id": "B6", "check": "Brand name spelled 'meelTe'", "severity": "critical" },
       { "id": "B7", "check": "No invented prices, offers, statistics, or claims", "severity": "critical" },
       { "id": "B8", "check": "Single focal point, uncluttered background", "severity": "major" }
     ]
@@ -143,7 +143,7 @@ Supporting detail lives in:
 - [ ] Every checklist item is objectively checkable by a later agent.
 - [ ] Conflicts are surfaced, not silently resolved.
 
-## Meelte example
+## meelTe example
 
 Brief: "Instagram portrait post for a Bengaluru kirana store, Diwali offer, warm and festive."
 
@@ -159,7 +159,7 @@ Output highlights:
 
 **Never:**
 
-- Fabricate, redraw, or approximate the Meelte logo, wordmark, or mark.
+- Fabricate, redraw, or approximate the meelTe logo, wordmark, or mark.
 - Invent a brand colour, font, or tone rule not present in the config.
 - Allow a third dominant hue without a recorded campaign justification.
 - Permit photorealism, 3D, or stock photography unless the user explicitly overrides style.
@@ -179,4 +179,4 @@ Output highlights:
 
 ## Sources
 
-Structure and checklist rigour adapted from `anthropics/skills@brand-guidelines` (palette/type application and readability rules). Content is Meelte-specific and derives from `req.txt` §2 and §9.
+Structure and checklist rigour adapted from `anthropics/skills@brand-guidelines` (palette/type application and readability rules). Content is meelTe-specific and derives from `req.txt` §2 and §9.

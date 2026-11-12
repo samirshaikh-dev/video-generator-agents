@@ -2,7 +2,7 @@
 
 These are composition targets, not a promise that every platform placement
 accepts every dimension. Check the current upload requirements before export.
-The source of truth for Meelte's existing pixel presets remains
+The source of truth for meelTe's existing pixel presets remains
 `brand/meelte-brand.json`.
 
 ## Platform targets

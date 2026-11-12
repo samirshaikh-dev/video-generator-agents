@@ -1,4 +1,4 @@
-# Character Design and Continuity — Meelte Illustrated Video
+# Character Design and Continuity — meelTe Illustrated Video
 
 ## Proportions
 

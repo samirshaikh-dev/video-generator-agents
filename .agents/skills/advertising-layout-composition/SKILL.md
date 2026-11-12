@@ -1,6 +1,6 @@
 ---
 name: advertising-layout-composition
-description: Plan the time-aware composition of illustrated Meelte social videos for LinkedIn and Instagram. Use for aspect-ratio adaptation, focal placement, subject-safe bounds, caption/logo zones, platform UI clearances, camera paths, and shot-to-shot layout continuity. Does not own campaign copy, illustration design, story timing, or video rendering.
+description: Plan the time-aware composition of illustrated meelTe social videos for LinkedIn and Instagram. Use for aspect-ratio adaptation, focal placement, subject-safe bounds, caption/logo zones, platform UI clearances, camera paths, and shot-to-shot layout continuity. Does not own campaign copy, illustration design, story timing, or video rendering.
 ---
 
 # Advertising Layout & Composition for Video
@@ -127,7 +127,7 @@ Recalculate for the actual placement, current UI, and creative.
       adjacent shots.
 - [ ] Critical content is legible on a phone at feed size.
 
-## Meelte example
+## meelTe example
 
 Brief: 15-second illustrated video for LinkedIn and Instagram: a local
 shopkeeper prepares an order and hands it to a customer.

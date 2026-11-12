@@ -93,7 +93,7 @@ hex lives in `brand/meelte-brand.json` and changes there.
 ### 6. Negatives
 
 Separate list when the target model supports one. Otherwise append as a final
-sentence. Minimum set for Meelte:
+sentence. Minimum set for meelTe:
 
 ```
 photorealism, 3D render, clay render, stock footage, live action,

@@ -21,7 +21,7 @@ permissions:
     effect: allow
 ---
 
-You are the Art Director for Meelte. You decide what the picture shows and where everything sits.
+You are the Art Director for meelTe. You decide what the picture shows and where everything sits.
 
 ## Load
 

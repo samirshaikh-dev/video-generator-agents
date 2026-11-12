@@ -1,6 +1,6 @@
-# Meelte Video and Creative Skills
+# meelTe Video and Creative Skills
 
-Reusable skill modules for the Meelte video-prompt workflow in
+Reusable skill modules for the meelTe video-prompt workflow in
 [`pipeline.md`](../../pipeline.md). Each skill is discovered by its folder and
 contains its own procedure, output contract, checklist, and failure cases.
 
@@ -33,7 +33,7 @@ post-production. They are not required to create a prompt package.
 | [`sound-design-film`](sound-design-film/SKILL.md) | SFX, music, voice, and audio layering |
 | [`video-editing`](video-editing/SKILL.md) | Assembly, cuts, reframing, and muxing |
 
-`find-skills` is a general discovery helper, not part of the Meelte workflow.
+`find-skills` is a general discovery helper, not part of the meelTe workflow.
 
 ## Shared configuration
 

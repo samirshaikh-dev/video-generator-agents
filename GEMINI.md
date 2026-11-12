@@ -1,10 +1,10 @@
-# Meelte Video Prompt Generation — Gemini CLI Guide
+# meelTe Video Prompt Generation — Gemini CLI Guide
 
-Read this file before working on the Meelte video-prompt workflow.
+Read this file before working on the meelTe video-prompt workflow.
 
 ## Project goal
 
-Turn a Meelte marketing request into a structured video concept, time-coded
+Turn a meelTe marketing request into a structured video concept, time-coded
 shot plan, and brand-safe, provider-neutral text-to-video prompt package. The
 default deliverable is the prompt package, not a rendered video.
 
@@ -20,7 +20,7 @@ req.txt                   project scope, contracts, and acceptance criteria
 AGENTS.md                 OpenCode-specific video workflow and agent status
 GEMINI.md                 this Gemini CLI guide
 opencode.jsonc            OpenCode project configuration
-brand/meelte-brand.json   single source of truth for Meelte brand rules
+brand/meelte-brand.json   single source of truth for meelTe brand rules
 .agents/skills/           reusable creative, video prompt, and QA skills
 .opencode/agents/         existing OpenCode agents; currently image-specific
 outputs/<request_id>/     prompt packages and, only if actually generated, video assets
@@ -75,7 +75,7 @@ Load only the skills needed for the request.
 |---|---|
 | `meelte-brand-system` | Palette, typography, logo, tone, brand constraints |
 | `marketing-creative-strategy` | Audience insight, message, copy, claims |
-| `flat-vector-illustration` | Meelte illustration style and character direction |
+| `flat-vector-illustration` | meelTe illustration style and character direction |
 | `advertising-layout-composition` | Framing, aspect ratio, safe areas |
 | `video-prompt-engineering` | Time-coded video prompt, motion, continuity, model adaptation |
 | `video-quality-review` | Prompt review; rendered-video review only with a real asset |
@@ -105,7 +105,7 @@ rendered. Never fabricate a generation result, asset path, or QA pass.
 ## Hard rules
 
 - Never invent campaign facts or alter approved copy silently.
-- Never fabricate, trace, or generate the Meelte logo.
+- Never fabricate, trace, or generate the meelTe logo.
 - Never describe a prompt package as a rendered or brand-approved video.
 - Keep provider-specific assumptions separate from the approved creative.
 - Preserve prompt versions and revisions; do not overwrite prior outputs.

@@ -1,13 +1,13 @@
-# Meelte Video Prompt Workflow
+# meelTe Video Prompt Workflow
 
-This file provides OpenCode-specific guidance for the Meelte video-prompt
+This file provides OpenCode-specific guidance for the meelTe video-prompt
 workflow. The host-agnostic source of truth is [`pipeline.md`](pipeline.md);
 the full project requirements are in [`req.txt`](req.txt). If this file and
 `pipeline.md` disagree, `pipeline.md` wins.
 
 ## Project goal
 
-Turn a Meelte marketing brief into a structured video concept, time-coded shot
+Turn a meelTe marketing brief into a structured video concept, time-coded shot
 plan, and brand-safe text-to-video prompt package. The default deliverable is
 the prompt package. Do not imply that a video was rendered unless a real video
 provider returned an asset.
@@ -35,7 +35,7 @@ request
 For each shot, preserve time arithmetic, one readable primary action, clear
 camera direction, and continuity across characters, props, setting, and style.
 Use exact user-supplied copy only. Do not ask a video model to invent or
-approximate the Meelte logo; reserve a clean area for the supplied asset or
+approximate the meelTe logo; reserve a clean area for the supplied asset or
 mark it `logo pending`.
 
 ## Skills
@@ -98,7 +98,7 @@ Do not present these intended roles as implemented agents until their
 - Never invent campaign facts, prices, offers, statistics, deadlines,
   guarantees, testimonials, product capabilities, or dialogue.
 - Never silently change approved copy or brand constraints.
-- Never fabricate, redraw, or generate the Meelte logo.
+- Never fabricate, redraw, or generate the meelTe logo.
 - Never present a prompt package as a rendered or brand-approved video.
 - Keep provider-specific behavior separate from the approved creative plan.
 - Preserve prompt versions and make revisions targeted and bounded.

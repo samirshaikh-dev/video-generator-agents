@@ -1,6 +1,6 @@
 ---
 name: campaign-series-consistency
-description: Keep a Meelte campaign series visually related without making every image identical. Use when producing a carousel, multi-post campaign, format set, or recurring monthly creative; when reusing a previous campaign's visual language for a new brief; when a series starts to drift in palette, typography, layout, or character treatment; or when deciding which elements stay locked and which vary per image.
+description: Keep a meelTe campaign series visually related without making every image identical. Use when producing a carousel, multi-post campaign, format set, or recurring monthly creative; when reusing a previous campaign's visual language for a new brief; when a series starts to drift in palette, typography, layout, or character treatment; or when deciding which elements stay locked and which vary per image.
 ---
 
 # Campaign Series Consistency
@@ -109,7 +109,7 @@ Not for: single-asset brand rules (`meelte-brand-system`), single-video composit
 - [ ] Ledger entry written.
 - [ ] No asset treated as a brand reference before approval.
 
-## Meelte example
+## meelTe example
 
 Three-post Diwali series, all 4:5:
 

@@ -1,15 +1,15 @@
 {
   "version": "1.0.0",
-  "updated": "2026-11-11",
+  "updated": "2026-11-12",
   "status": "active",
   "source_of_truth": true,
   "_note": "Single source of truth for meelTe visual identity. Skills and agents READ this file. Do not copy hex values into prompts or skill files; reference the token name instead so a palette change propagates everywhere.",
   "brand": {
     "name": "meelTe",
     "name_rules": [
-      "Always 'meelTe' - capital M, double e.",
-      "Never render 'MELTE', 'Meelte.', 'Meelte Inc', or a split wordmark unless the supplied logo asset shows it.",
-      "The brand name in copy is never abbreviated and never lowercased."
+      "Always write the brand name exactly as 'meelTe' (lowercase m, uppercase T, double e).",
+      "Never render 'Meelte', 'MeelTe', 'MEELTE', 'MELTE', 'meelte', 'meelTe.', or 'meelTe Inc', or a split wordmark unless the supplied logo asset shows it.",
+      "The brand name in copy is never abbreviated and must always use the exact casing 'meelTe'."
     ],
     "positioning": "The friendly technology partner for local businesses.",
     "promise": "Make local business owners feel understood and empowered.",
@@ -26,7 +26,7 @@
       "Lead with the business benefit; technology is the how, never the headline.",
       "Warm and plain-spoken. No enterprise jargon, no growth-hacker language.",
       "Confident, never boastful. No superlatives that cannot be substantiated.",
-      "Celebrate the local business owner as the hero; Meelte is the helpful tool."
+      "Celebrate the local business owner as the hero; meelTe is the helpful tool."
     ],
     "tone_avoid": [
       "corporate stock-photo optimism",
@@ -175,7 +175,7 @@
         "recreated, redrawn, or approximated from memory"
       ]
     },
-    "integrity_rule": "If no approved logo file is supplied, leave a reserved logo zone and mark the deliverable 'logo pending'. Never fabricate, trace, or generate the Meelte logo."
+    "integrity_rule": "If no approved logo file is supplied, leave a reserved logo zone and mark the deliverable 'logo pending'. Never fabricate, trace, or generate the meelTe logo."
   },
   "illustration": {
     "style_name": "Playful Modern Branding + Flat Vector Illustration + Bold Editorial Advertising",
@@ -216,7 +216,7 @@
       "People must be contextually appropriate to the market and campaign audience.",
       "Avoid stereotypes of profession, gender, age, or region.",
       "Props must earn their place; no filler objects to balance the frame.",
-      "Smartphone props communicate Meelte's digital capability only when relevant."
+      "Smartphone props communicate meelTe's digital capability only when relevant."
     ]
   },
   "formats": [
@@ -276,10 +276,10 @@
     "cta_max_words": 4,
     "claim_policy": "Never invent prices, offers, discounts, statistics, product capabilities, or customer claims. If a fact is not in the brief, it does not appear in the creative.",
     "cta_examples": [
-      "Start selling on Meelte",
+      "Start selling on meelTe",
       "Open your shop",
       "Grow your store",
-      "Try Meelte free",
+      "Try meelTe free",
       "See how it works"
     ],
     "text_rendering_modes": [
