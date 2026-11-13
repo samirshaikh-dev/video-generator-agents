@@ -5,7 +5,8 @@ import {
   spring,
   useCurrentFrame,
   useVideoConfig,
-  Audio,
+  Img,
+  staticFile,
   Sequence,
 } from "remotion";
 
@@ -19,10 +20,19 @@ const BRAND = {
   fontFamily: "Poppins, 'Plus Jakarta Sans', sans-serif",
 };
 
+// --- SCENE IMAGE PATHS ---
+// Place scene images into your public folder or reference directly
+const SCENES = {
+  scene1: "scenes/scene-1.jpg",
+  scene2: "scenes/scene-2.jpg",
+  scene3: "scenes/scene-3.jpg",
+  scene4: "scenes/scene-4.jpg",
+};
+
 // --- CAPTION DATA WITH WORD TIMESTAMPS ---
 interface CaptionWord {
   word: string;
-  start: number; // in seconds
+  start: number;
   end: number;
 }
 
@@ -102,13 +112,12 @@ const CAPTIONS: CaptionPhrase[] = [
   },
 ];
 
-// --- ANIMATED CAPTION OVERLAY COMPONENT ---
+// --- ANIMATED KARAOKE CAPTIONS ---
 const AnimatedCaptions: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const currentSec = frame / fps;
 
-  // Find active phrase
   const activePhrase = CAPTIONS.find(
     (c) => currentSec >= c.startSec && currentSec <= c.endSec
   );
@@ -119,7 +128,7 @@ const AnimatedCaptions: React.FC = () => {
     <div
       style={{
         position: "absolute",
-        top: 1220,
+        top: 1240,
         left: 0,
         right: 0,
         display: "flex",
@@ -130,16 +139,16 @@ const AnimatedCaptions: React.FC = () => {
     >
       <div
         style={{
-          background: "rgba(23, 25, 35, 0.82)",
+          background: "rgba(23, 25, 35, 0.85)",
           padding: "16px 36px",
           borderRadius: 24,
           display: "flex",
           flexWrap: "wrap",
           gap: 12,
           justifyContent: "center",
-          maxWidth: 900,
-          boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
-          backdropFilter: "blur(8px)",
+          maxWidth: 920,
+          boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+          backdropFilter: "blur(10px)",
         }}
       >
         {activePhrase.words.map((w, idx) => {
@@ -178,279 +187,71 @@ const AnimatedCaptions: React.FC = () => {
   );
 };
 
-// --- SCENE 1: THE HOOK (0 - 4s | 0 - 120 frames) ---
-const Scene1Hook: React.FC = () => {
+// --- SHOT 1: THE HOOK (0 - 4s | 0 - 120 frames) ---
+const Scene1: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const scale = interpolate(frame, [0, 120], [1, 1.05]);
+  const scale = interpolate(frame, [0, 120], [1, 1.06]);
 
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: BRAND.lavender,
-        transform: `scale(${scale})`,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        fontFamily: BRAND.fontFamily,
-      }}
-    >
-      {/* Friendly Shop Environment Mockup */}
-      <div
+    <AbsoluteFill style={{ overflow: "hidden", backgroundColor: BRAND.charcoal }}>
+      <Img
+        src={SCENES.scene1}
         style={{
-          width: 820,
-          height: 980,
-          backgroundColor: BRAND.white,
-          borderRadius: 36,
-          boxShadow: "0 20px 50px rgba(116, 59, 170, 0.15)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: 60,
-          border: `4px solid ${BRAND.purple}`,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          transform: `scale(${scale})`,
         }}
-      >
-        {/* Shopkeeper Badge */}
-        <div
-          style={{
-            background: BRAND.purple,
-            color: BRAND.white,
-            padding: "12px 32px",
-            borderRadius: 30,
-            fontSize: 28,
-            fontWeight: 700,
-          }}
-        >
-          Special Deal Alert
-        </div>
-
-        {/* Product Illustration */}
-        <div
-          style={{
-            width: 440,
-            height: 440,
-            borderRadius: 32,
-            background: "linear-gradient(135deg, #FFE8C2 0%, #FEA711 100%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: 160,
-          }}
-        >
-          🎁
-        </div>
-
-        <div style={{ textAlign: "center" }}>
-          <h2 style={{ fontSize: 52, color: BRAND.charcoal, margin: "0 0 10px 0", fontWeight: 800 }}>
-            Featured Today
-          </h2>
-          <p style={{ fontSize: 32, color: BRAND.purple, margin: 0, fontWeight: 600 }}>
-            Don't wait for foot traffic
-          </p>
-        </div>
-      </div>
+      />
     </AbsoluteFill>
   );
 };
 
-// --- SCENE 2: THE PLUS ACTION (4 - 9s | 120 - 270 frames) ---
-const Scene2PlusAction: React.FC = () => {
+// --- SHOT 2: PHOTO SNAP (4 - 9s | 120 - 270 frames) ---
+const Scene2: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const relativeFrame = frame;
-
-  const tapSpring = spring({
-    frame: relativeFrame - 45, // tap at ~1.5s into scene
-    fps,
-    config: { damping: 10, stiffness: 200 },
-  });
+  const scale = interpolate(frame, [0, 150], [1, 1.05]);
 
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: "#EFE8FA",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontFamily: BRAND.fontFamily,
-      }}
-    >
-      {/* Smartphone Mockup */}
-      <div
+    <AbsoluteFill style={{ overflow: "hidden", backgroundColor: BRAND.charcoal }}>
+      <Img
+        src={SCENES.scene2}
         style={{
-          width: 780,
-          height: 1400,
-          backgroundColor: BRAND.charcoal,
-          borderRadius: 54,
-          padding: 24,
-          boxShadow: "0 30px 80px rgba(0,0,0,0.35)",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          transform: `scale(${scale})`,
         }}
-      >
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            backgroundColor: BRAND.white,
-            borderRadius: 40,
-            overflow: "hidden",
-            position: "relative",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          {/* App Header */}
-          <div
-            style={{
-              padding: "40px 30px 20px",
-              background: BRAND.purple,
-              color: BRAND.white,
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <span style={{ fontSize: 36, fontWeight: 800 }}>meelTe</span>
-            <span style={{ fontSize: 28, background: BRAND.orange, padding: "6px 16px", borderRadius: 16 }}>
-              Local Ads
-            </span>
-          </div>
-
-          {/* Feed Mockup Content */}
-          <div style={{ padding: 30, display: "flex", flexDirection: "column", gap: 20 }}>
-            <div style={{ height: 180, background: BRAND.lavender, borderRadius: 20 }} />
-            <div style={{ height: 260, background: BRAND.lavender, borderRadius: 20 }} />
-          </div>
-
-          {/* Purple Floating '+' Action Button */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 60,
-              right: 60,
-              width: 120,
-              height: 120,
-              borderRadius: 60,
-              background: `linear-gradient(135deg, ${BRAND.purple} 0%, #9B51E0 100%)`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: BRAND.white,
-              fontSize: 68,
-              fontWeight: 800,
-              boxShadow: "0 12px 30px rgba(116, 59, 170, 0.4)",
-              transform: `scale(${1 + tapSpring * 0.2})`,
-            }}
-          >
-            +
-          </div>
-        </div>
-      </div>
+      />
     </AbsoluteFill>
   );
 };
 
-// --- SCENE 3: DISCOUNT & MAP PINNING (9 - 16s | 270 - 480 frames) ---
-const Scene3DiscountMap: React.FC = () => {
+// --- SHOT 3: DISCOUNT & MAP SETUP (9 - 16s | 270 - 480 frames) ---
+const Scene3: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  const badgeSpring = spring({
-    frame: frame - 45,
-    fps,
-    config: { damping: 10, stiffness: 160 },
-  });
+  const scale = interpolate(frame, [0, 210], [1.05, 1.0]);
 
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: BRAND.lavender,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontFamily: BRAND.fontFamily,
-      }}
-    >
-      <div
+    <AbsoluteFill style={{ overflow: "hidden", backgroundColor: BRAND.charcoal }}>
+      <Img
+        src={SCENES.scene3}
         style={{
-          width: 860,
-          backgroundColor: BRAND.white,
-          borderRadius: 36,
-          padding: 40,
-          boxShadow: "0 25px 60px rgba(0,0,0,0.12)",
-          display: "flex",
-          flexDirection: "column",
-          gap: 30,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          transform: `scale(${scale})`,
         }}
-      >
-        <div style={{ position: "relative", width: "100%", height: 420, borderRadius: 24, overflow: "hidden" }}>
-          {/* Product Banner */}
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              background: "linear-gradient(135deg, #FEA711 0%, #E68A00 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 140,
-            }}
-          >
-            🛍️
-          </div>
-
-          {/* Popping Orange Discount Badge */}
-          <div
-            style={{
-              position: "absolute",
-              top: 24,
-              right: 24,
-              backgroundColor: BRAND.charcoal,
-              color: BRAND.orange,
-              padding: "16px 28px",
-              borderRadius: 20,
-              fontSize: 34,
-              fontWeight: 900,
-              transform: `scale(${Math.max(0, badgeSpring)}) rotate(-4deg)`,
-              boxShadow: "0 8px 24px rgba(0,0,0,0.25)",
-            }}
-          >
-            FLAT 25% OFF
-          </div>
-        </div>
-
-        {/* Map Preview Card */}
-        <div
-          style={{
-            background: "#E8F4FD",
-            borderRadius: 24,
-            padding: 30,
-            display: "flex",
-            alignItems: "center",
-            gap: 24,
-            border: `2px dashed ${BRAND.purple}`,
-          }}
-        >
-          <span style={{ fontSize: 50 }}>📍</span>
-          <div>
-            <div style={{ fontSize: 32, fontWeight: 800, color: BRAND.charcoal }}>
-              Store Location Pinned
-            </div>
-            <div style={{ fontSize: 24, color: BRAND.purple }}>
-              Nearby customers will see you first
-            </div>
-          </div>
-        </div>
-      </div>
+      />
     </AbsoluteFill>
   );
 };
 
-// --- SCENE 4: INSTANT LIVE FEED (16 - 21s | 480 - 630 frames) ---
-const Scene4LiveFeed: React.FC = () => {
+// --- SHOT 4: DIRECT FOOT TRAFFIC & DELIVERY (16 - 21s | 480 - 630 frames) ---
+const Scene4: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const scale = interpolate(frame, [0, 150], [1, 1.05]);
 
   const toastSlide = spring({
     frame,
@@ -459,86 +260,51 @@ const Scene4LiveFeed: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: BRAND.lavender,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        fontFamily: BRAND.fontFamily,
-      }}
-    >
-      {/* Success Green Toast */}
+    <AbsoluteFill style={{ overflow: "hidden", backgroundColor: BRAND.charcoal }}>
+      <Img
+        src={SCENES.scene4}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          transform: `scale(${scale})`,
+        }}
+      />
+
+      {/* Floating Success Notification */}
       <div
         style={{
           position: "absolute",
-          top: 260,
-          background: "#10B981",
-          color: BRAND.white,
-          padding: "20px 48px",
-          borderRadius: 30,
-          fontSize: 36,
-          fontWeight: 800,
-          boxShadow: "0 15px 40px rgba(16, 185, 129, 0.35)",
-          transform: `translateY(${interpolate(toastSlide, [0, 1], [-80, 0])}px)`,
+          top: 240,
+          left: 0,
+          right: 0,
+          display: "flex",
+          justifyContent: "center",
+          transform: `translateY(${interpolate(toastSlide, [0, 1], [-60, 0])}px)`,
           zIndex: 40,
         }}
       >
-        ✓ Advertisement Created!
-      </div>
-
-      {/* Live Feed Card */}
-      <div
-        style={{
-          width: 860,
-          backgroundColor: BRAND.white,
-          borderRadius: 36,
-          padding: 36,
-          boxShadow: "0 20px 50px rgba(0,0,0,0.15)",
-          display: "flex",
-          flexDirection: "column",
-          gap: 24,
-        }}
-      >
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span style={{ fontSize: 30, fontWeight: 700, color: BRAND.charcoal }}>Your Shop</span>
-          <span
-            style={{
-              background: BRAND.orange,
-              color: BRAND.charcoal,
-              padding: "8px 20px",
-              borderRadius: 14,
-              fontSize: 24,
-              fontWeight: 800,
-            }}
-          >
-            50m away • LIVE
-          </span>
-        </div>
         <div
           style={{
-            height: 380,
-            background: "linear-gradient(135deg, #FEA711 0%, #743BAA 100%)",
-            borderRadius: 24,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: 120,
+            background: "#10B981",
+            color: BRAND.white,
+            padding: "18px 42px",
+            borderRadius: 30,
+            fontSize: 34,
+            fontWeight: 800,
+            fontFamily: BRAND.fontFamily,
+            boxShadow: "0 15px 40px rgba(16, 185, 129, 0.4)",
           }}
         >
-          🎁
-        </div>
-        <div style={{ fontSize: 28, color: "#666", fontWeight: 600 }}>
-          Direct foot traffic starting now
+          ✓ Advertisement Created • 50m away
         </div>
       </div>
     </AbsoluteFill>
   );
 };
 
-// --- SCENE 5: BRAND OUTRO (21 - 25s | 630 - 750 frames) ---
-const Scene5Outro: React.FC = () => {
+// --- SHOT 5: BRAND OUTRO (21 - 25s | 630 - 750 frames) ---
+const Scene5: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -561,7 +327,6 @@ const Scene5Outro: React.FC = () => {
       }}
     >
       <div style={{ transform: `scale(${pop})`, textAlign: "center" }}>
-        {/* Brand Wordmark */}
         <h1
           style={{
             fontSize: 120,
@@ -577,7 +342,6 @@ const Scene5Outro: React.FC = () => {
           Grow your store free
         </p>
 
-        {/* Action Button */}
         <div
           style={{
             background: BRAND.orange,
@@ -603,34 +367,33 @@ export const Reel1FlashDeal: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: BRAND.charcoal, overflow: "hidden" }}>
       {/* SHOT 1: The Hook (0 - 4s) */}
       <Sequence from={0} durationInFrames={120}>
-        <Scene1Hook />
+        <Scene1 />
       </Sequence>
 
-      {/* SHOT 2: The Plus Action (4 - 9s) */}
+      {/* SHOT 2: Photo Snap (4 - 9s) */}
       <Sequence from={120} durationInFrames={150}>
-        <Scene2PlusAction />
+        <Scene2 />
       </Sequence>
 
-      {/* SHOT 3: Discount & Map Pinning (9 - 16s) */}
+      {/* SHOT 3: Discount & Map Setup (9 - 16s) */}
       <Sequence from={270} durationInFrames={210}>
-        <Scene3DiscountMap />
+        <Scene3 />
       </Sequence>
 
-      {/* SHOT 4: Instant Live Activation (16 - 21s) */}
+      {/* SHOT 4: Direct Foot Traffic & Delivery (16 - 21s) */}
       <Sequence from={480} durationInFrames={150}>
-        <Scene4LiveFeed />
+        <Scene4 />
       </Sequence>
 
-      {/* SHOT 5: Outro & Call to Action (21 - 25s) */}
+      {/* SHOT 5: Brand Outro (21 - 25s) */}
       <Sequence from={630} durationInFrames={120}>
-        <Scene5Outro />
+        <Scene5 />
       </Sequence>
 
-      {/* Dynamic Animated Karaoke Captions (Safe Area: Y 1220px) */}
+      {/* Dynamic Animated Karaoke Captions */}
       <AnimatedCaptions />
     </AbsoluteFill>
   );
 };
 
 export default Reel1FlashDeal;
-

@@ -1,9 +1,18 @@
 {
   "request_id": "MEE-2026-0001",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "duration_seconds": 25,
   "fps": 30,
   "total_frames": 750,
+  "art_direction": {
+    "style_name": "Playful Modern 2D Vector Illustration + Bold Editorial Advertising",
+    "reference_images": [
+      "Warm Bakery Bag Exchange.png",
+      "image.png"
+    ],
+    "character_lock": "Friendly Indian bakery shopkeeper with short black beard, white shirt, deep purple apron (#743BAA). Customer is Indian woman in mustard/orange top (#FEA711) with cream scarf.",
+    "setting_lock": "Artisanal neighborhood bakery with wooden shelves, golden breads, purple dome lamps, lavender walls (#F4EFFD), and pastry glass display."
+  },
   "brand_constraints": {
     "brand_name": "meelTe",
     "palette": {
@@ -12,196 +21,67 @@
       "neutral_dark": "#171923",
       "neutral_light": "#FFFFFF"
     },
-    "typography": "Poppins / Manrope Bold geometric sans-serif",
-    "banned_styles": ["photorealism", "3D render", "clay render", "corporate stock photo"],
-    "logo_rule": "Deterministic overlay in reserved footer zone; never AI generated"
+    "typography": "Poppins / Manrope Bold geometric sans-serif"
   },
-  "campaign_message": {
-    "audience_insight": "Local business owners want fast, cost-free ways to attract foot traffic without dealing with complex ad managers or approval wait times.",
-    "core_promise": "meelTe lets you post a single item deal in 60 seconds with instant discount badges and direct neighborhood discovery.",
-    "headline": "Got a deal to share today?",
-    "cta": "Grow your store free"
-  },
-  "visual_concept": "A friendly local shopkeeper effortlessly transforms a physical product deal into a live digital promotion on their phone, seeing it instantly reach neighbors nearby.",
-  "style_direction": "Playful Modern 2D Vector Illustration + Clean Mobile UI Motion. Smooth motion, soft shadows, uncluttered background, warm community vibe.",
-  "video_composition": {
-    "canvas": { "width": 1080, "height": 1920, "aspect_ratio": "9:16" },
-    "safe_zones": {
-      "top_margin_px": 220,
-      "bottom_margin_px": 340,
-      "side_margin_px": 90,
-      "caption_vertical_band": "60% - 72% from top (Y: 1152px - 1380px)",
-      "cta_footer_band": "80% - 90% from top (Y: 1536px - 1728px)"
-    }
-  },
-  "shot_plan": [
+  "scenes": [
     {
       "shot_id": "SHOT-01",
-      "start_sec": 0.0,
-      "end_sec": 4.0,
-      "duration_sec": 4.0,
-      "start_frame": 0,
-      "end_frame": 120,
-      "scene_description": "Friendly shopkeeper in an approachable modern 2D vector style stands behind a clean wooden counter holding up a featured product with an inviting smile.",
-      "action": "Shopkeeper sets product down on counter and gestures enthusiastically toward camera.",
-      "camera": "Eye-level medium shot; gentle 3% push-in.",
-      "transition": "Smooth cut to mobile screen view.",
-      "continuity": "Warm shop lighting, lavender wall panel, charcoal accents, shopkeeper wears purple apron with orange trim."
+      "time_range": "0:00 - 4:00",
+      "frames": "0 - 120",
+      "asset_file": "outputs/MEE-2026-0001/scenes/scene-1.jpg",
+      "scene_title": "The Hook",
+      "action": "Shopkeeper behind bakery counter holds up fresh croissant toward camera with an inviting smile.",
+      "camera": "Slow 3% push-in (Ken Burns).",
+      "voiceover": "Got a product you want to sell fast today? Don't wait for foot traffic.",
+      "caption": "Got a deal to share today?"
     },
     {
       "shot_id": "SHOT-02",
-      "start_sec": 4.0,
-      "end_sec": 9.0,
-      "duration_sec": 5.0,
-      "start_frame": 120,
-      "end_frame": 270,
-      "scene_description": "First-person perspective holding a sleek smartphone showing the meelTe app feed.",
-      "action": "Thumb taps the purple '+' floating action button. Bottom sheet modal opens. Thumb selects 'Single Item Advertisement'. Camera viewfinder opens and snaps the product photo.",
-      "camera": "Top-down / angled close-up on phone screen; slight tilt.",
-      "transition": "Fast UI transition to ad configuration form.",
-      "continuity": "Hand skin tone matches shopkeeper from SHOT-01; phone bezel charcoal."
+      "time_range": "4:00 - 9:00",
+      "frames": "120 - 270",
+      "asset_file": "outputs/MEE-2026-0001/scenes/scene-2.jpg",
+      "scene_title": "Photo Snap",
+      "action": "First-person POV holding smartphone over bakery counter framing croissant display; camera autofocus box pulses and snaps photo.",
+      "camera": "Micro-tilt down toward viewfinder.",
+      "voiceover": "Open meelTe, tap the plus sign, and snap a clear photo.",
+      "caption": "Tap + ➔ Single Item",
+      "sfx": "camera_shutter at 0:07"
     },
     {
       "shot_id": "SHOT-03",
-      "start_sec": 9.0,
-      "end_sec": 16.0,
-      "duration_sec": 7.0,
-      "start_frame": 270,
-      "end_frame": 480,
-      "scene_description": "Form screen inside meelTe. Product photo previewed.",
-      "action": "User inputs price. Taps discount toggle 'Flat %'. A vibrant orange badge 'FLAT 25% OFF' pops onto the image with a subtle bounce. Mini map card drops an orange pin on the storefront address.",
-      "camera": "Direct UI focus; smooth scroll down form.",
-      "transition": "Micro-zoom toward the create button.",
-      "continuity": "Brand purple buttons and orange badge highlight."
+      "time_range": "9:00 - 16:00",
+      "frames": "270 - 480",
+      "asset_file": "outputs/MEE-2026-0001/scenes/scene-3.jpg",
+      "scene_title": "Discount & Map Pin",
+      "action": "Phone screen shows ad creation form; vibrant orange 'FLAT 25% OFF' badge springs onto the croissant photo, and map drops an orange pin.",
+      "camera": "Smooth steady pan down form card.",
+      "voiceover": "Add your price, pick your discount badge, and pin your store on the map.",
+      "caption": "Pick your discount badge",
+      "sfx": "badge_pop at 0:12"
     },
     {
       "shot_id": "SHOT-04",
-      "start_sec": 16.0,
-      "end_sec": 21.0,
-      "duration_sec": 5.0,
-      "start_frame": 480,
-      "end_frame": 630,
-      "scene_description": "Tapping 'Create Advertisement'. Instant green snackbar 'Advertisement created'.",
-      "action": "Screen transitions smoothly to the live Advertisements Feed. The new ad appears right at the top with proximity badge '50m away'. Scene cuts to pedestrian on street noticing the notification on their phone and walking toward shop.",
-      "camera": "Split/sequential: UI success cut to eye-level street scene.",
-      "transition": "Smooth fade-slide to brand card.",
-      "continuity": "Same product banner photo from SHOT-03; street has matching vector architecture."
+      "time_range": "16:00 - 21:00",
+      "frames": "480 - 630",
+      "asset_file": "outputs/MEE-2026-0001/scenes/scene-4.jpg",
+      "scene_title": "Direct Foot Traffic & Handover",
+      "action": "Smiling shopkeeper hands brown bakery bag across counter to happy female customer in mustard top.",
+      "camera": "Gentle lateral drift with green 'Advertisement created' notification overlay.",
+      "voiceover": "Hit create! No waiting for approvals—your deal goes live to nearby shoppers right now.",
+      "caption": "Instantly live to nearby neighbors!",
+      "sfx": "success_chime at 0:18"
     },
     {
       "shot_id": "SHOT-05",
-      "start_sec": 21.0,
-      "end_sec": 25.0,
-      "duration_sec": 4.0,
-      "start_frame": 630,
-      "end_frame": 750,
-      "scene_description": "meelTe brand closing card. Deep purple canvas (#743BAA) with subtle curved lavender accent line.",
-      "action": "meelTe wordmark scales in smoothly. Bold white headline 'Grow your store free' with a bright orange pill CTA button 'Try meelTe free'.",
-      "camera": "Static locked card with gentle kinetic text pop.",
-      "transition": "Clean hold until frame 750.",
-      "continuity": "Exact brand logo variant (reverse-white on purple)."
+      "time_range": "21:00 - 25:00",
+      "frames": "630 - 750",
+      "asset_file": null,
+      "scene_title": "meelTe Brand Outro",
+      "action": "Deep purple canvas (#743BAA), white meelTe wordmark, headline 'Grow your store free', vibrant orange CTA button 'Try meelTe free'.",
+      "camera": "Locked frame with spring scale on logo and button.",
+      "voiceover": "Put your shop on the map. Try meelTe free today!",
+      "caption": "Grow your store free",
+      "sfx": "brand_chord at 0:22.5"
     }
-  ],
-  "audio_plan": {
-    "voiceover_rate_wpm": 138,
-    "total_words": 57,
-    "ducking_profile": {
-      "music_base_volume_db": -6,
-      "music_ducked_volume_db": -16,
-      "attack_ms": 120,
-      "release_ms": 250
-    },
-    "captions": [
-      {
-        "phrase": "Got a deal to share today?",
-        "start_sec": 0.2,
-        "end_sec": 3.6,
-        "words": [
-          { "word": "Got", "start": 0.2, "end": 0.6 },
-          { "word": "a", "start": 0.6, "end": 0.8 },
-          { "word": "deal", "start": 0.8, "end": 1.4 },
-          { "word": "to", "start": 1.4, "end": 1.7 },
-          { "word": "share", "start": 1.7, "end": 2.4 },
-          { "word": "today?", "start": 2.4, "end": 3.4 }
-        ]
-      },
-      {
-        "phrase": "Tap + ➔ Single Item",
-        "start_sec": 4.2,
-        "end_sec": 8.5,
-        "words": [
-          { "word": "Open", "start": 4.2, "end": 4.7 },
-          { "word": "meelTe,", "start": 4.7, "end": 5.4 },
-          { "word": "tap", "start": 5.4, "end": 5.9 },
-          { "word": "the", "start": 5.9, "end": 6.1 },
-          { "word": "plus", "start": 6.1, "end": 6.7 },
-          { "word": "sign", "start": 6.7, "end": 7.3 }
-        ]
-      },
-      {
-        "phrase": "Pick your discount badge",
-        "start_sec": 9.2,
-        "end_sec": 15.5,
-        "words": [
-          { "word": "Add", "start": 9.2, "end": 9.6 },
-          { "word": "your", "start": 9.6, "end": 9.9 },
-          { "word": "price,", "start": 9.9, "end": 10.6 },
-          { "word": "pick", "start": 10.6, "end": 11.1 },
-          { "word": "your", "start": 11.1, "end": 11.4 },
-          { "word": "discount", "start": 11.4, "end": 12.2 },
-          { "word": "badge", "start": 12.2, "end": 13.0 }
-        ]
-      },
-      {
-        "phrase": "Instantly live to nearby neighbors!",
-        "start_sec": 16.2,
-        "end_sec": 20.6,
-        "words": [
-          { "word": "Hit", "start": 16.2, "end": 16.6 },
-          { "word": "create!", "start": 16.6, "end": 17.3 },
-          { "word": "No", "start": 17.3, "end": 17.6 },
-          { "word": "waiting", "start": 17.6, "end": 18.2 },
-          { "word": "for", "start": 18.2, "end": 18.5 },
-          { "word": "approvals", "start": 18.5, "end": 19.4 }
-        ]
-      },
-      {
-        "phrase": "Grow your store free",
-        "start_sec": 21.2,
-        "end_sec": 24.8,
-        "words": [
-          { "word": "Put", "start": 21.2, "end": 21.6 },
-          { "word": "your", "start": 21.6, "end": 21.9 },
-          { "word": "shop", "start": 21.9, "end": 22.5 },
-          { "word": "on", "start": 22.5, "end": 22.8 },
-          { "word": "the", "start": 22.8, "end": 23.0 },
-          { "word": "map!", "start": 23.0, "end": 23.8 }
-        ]
-      }
-    ],
-    "sfx_cues": [
-      { "time_sec": 7.0, "frame": 210, "type": "camera_shutter", "description": "Mechanical camera shutter snap" },
-      { "time_sec": 12.0, "frame": 360, "type": "ui_badge_pop", "description": "Bouncy pop sound as orange badge attaches" },
-      { "time_sec": 18.0, "frame": 540, "type": "publish_chime", "description": "Gentle upward major chime" },
-      { "time_sec": 22.5, "frame": 675, "type": "brand_chord", "description": "Warm acoustic resolve chord" }
-    ]
-  },
-  "text_and_logo_plan": {
-    "rendering_mode": "overlay_after_generation",
-    "logo_asset": "brand/assets/logo/primary-full-colour",
-    "caption_styling": {
-      "font_family": "Poppins",
-      "weight": 800,
-      "font_size_px": 54,
-      "text_color": "#FFFFFF",
-      "active_word_color": "#FEA711",
-      "background_card": "rgba(23, 25, 35, 0.75)",
-      "border_radius_px": 24,
-      "padding_px": "16px 32px"
-    }
-  },
-  "unresolved_assumptions": [
-    "Audio assets (voiceover MP3 and SFX WAV files) are synthesized or queued for post-production assembly.",
-    "Video rendering adapter is not yet wired to a live cloud GPU provider; full prompt package and deterministic Remotion template are provided."
   ]
 }
-

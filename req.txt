@@ -207,6 +207,16 @@ Responsibilities:
   the raw asset and report verified delivery details separately.
 - Never label a prompt as a rendered, reviewed, or brand-approved video.
 
+I. ILLUSTRATION & SCENE KEYFRAME GENERATOR
+Responsibilities:
+- Produce bespoke 9:16 vertical 2D commercial vector illustration keyframes
+  for each planned scene beat based on reference assets and brand rules.
+  (Canonical style standard: Warm Bakery Bag Exchange.png and image.png).
+- Maintain character continuity (wardrobe, facial features, hair, skin tone)
+  and setting details across all scene assets.
+- Store scene image assets under outputs/<request_id>/scenes/scene-<N>.jpg.
+Output: verified 9:16 keyframe image assets and scene consistency notes.
+
 ===============================================================================
 5. WORKFLOW AND HANDOFFS
 ===============================================================================
@@ -216,12 +226,16 @@ Default workflow:
 2. Load brand rules and identify conflicts.
 3. Develop the campaign message, unless approved copy was supplied.
 4. Create the video concept, time-coded shot plan, and continuity rules.
-5. Build the provider-neutral video prompt package.
-6. Run the prompt QA gate and route issues to their owner.
-7. Save or return the approved prompt package with its version and metadata.
-8. If an explicitly configured provider is available and generation was
+5. Generate bespoke 9:16 scene illustration keyframes under outputs/<request_id>/scenes/
+   matching canonical brand style references (e.g. Warm Bakery Bag Exchange.png).
+6. Build the provider-neutral video prompt package (supporting text-to-video and
+   image-to-video adapters).
+7. Run the prompt QA gate and route issues to their owner.
+8. Save or return the approved prompt package with its version, scene assets,
+   and metadata.
+9. If an explicitly configured provider is available and generation was
    requested, call it as a separate optional step; otherwise stop at the prompt.
-9. Review a returned video only if an actual video asset is available.
+10. Review a returned video only if an actual video asset is available.
 
 Workflow rules:
 - The brief is the source of campaign facts; the brand file is the source of
@@ -347,11 +361,29 @@ E. QualityReview
 
 F. FinalDeliverable
 - request_id
-- deliverable_type (prompt_package or generated_video)
+- deliverable_type (prompt_package, illustrated_storyboard, or generated_video)
 - asset_reference (optional)
 - prompt_version
 - final_status
 - known_limitations (optional)
+
+G. SceneKeyframeAsset
+- request_id
+- shot_id
+- scene_index
+- asset_path (e.g. outputs/<request_id>/scenes/scene-1.jpg)
+- aspect_ratio (9:16)
+- dimensions (1080x1920)
+- character_references
+- setting_description
+- created_at
+
+H. AudioCompositionSpec
+- voiceover_pacing_wpm (130-145)
+- word_level_timestamps[]
+- music_ducking_curve (base_db, ducked_db, attack_ms, release_ms)
+- sfx_cues[] (timecode, type, description)
+- subtitle_safe_area_bounds
 
 ===============================================================================
 8. USER EXPERIENCE REQUIREMENTS
@@ -464,6 +496,9 @@ For the prompt-workflow documentation:
 3. Clear distinction between prompt-package delivery and optional video
    generation.
 4. Documented meelTe brand, temporal planning, continuity, and QA gates.
+5. Bespoke illustrated scene keyframe storyboard (outputs/<request_id>/scenes/)
+   supporting dual-path delivery: Motion Graphics/Remotion assembly and
+   Image-to-Video AI model prompting.
 
 The specialist video skills and OpenCode agents/orchestrator are present.
 Remaining implementation work, if separately approved:
