@@ -34,12 +34,16 @@ report the configuration error.
 
 ## Antigravity collaboration
 
-Use Antigravity custom subagents when the corresponding specialist profiles
-are available. The project’s specialist prompts currently live under
-`.opencode/agents/` and are not discovered as Antigravity agents. Until
-Antigravity-native specialist profiles are added, perform the required steps
-yourself using the listed skills. Never claim a specialist handoff occurred
-when it did not.
+Specialist subagents are configured under `.agents/agents/`. When orchestrating a workflow, delegate to these subagents:
+- `brand-guardian`: brand constraints and conflict checks
+- `campaign-strategist`: message hierarchy and copy audit
+- `video-director`: visual concept, layout composition, and shot planning
+- `video-prompt-engineer`: prompt package construction and negative constraints
+- `video-prompt-qa`: quality gate and review
+- `remotion-builder`: React/Remotion code generation
+- `voiceover-specialist`: audio ducking and timestamp sync
+- `post-production-editor`: FFmpeg stitching and subtitle burning
+- `finalizer`: packaging deliverable and metadata recording
 
 ## Workflow
 
