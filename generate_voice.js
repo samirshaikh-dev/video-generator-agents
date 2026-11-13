@@ -11,12 +11,11 @@ if (!fs.existsSync(OUTPUT_DIR)) {
 }
 
 const PHRASES = [
-  "Got a product you want to sell fast today?",
+  "Got a product you want to sell today?",
   "Don't wait for foot traffic.",
-  "Open meelTe, tap the plus sign, and snap a clear photo.",
-  "Add your price, pick your discount badge, and pin your store on the map.",
+  "Open meelTe, tap the plus sign",
+  "Add your price, pick your discount badge",
   "Hit create! No waiting for approvals,",
-  "your deal goes live to nearby shoppers right now.",
   "Put your shop on the map.",
   "Try meelTe free today!"
 ];

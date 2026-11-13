@@ -129,6 +129,26 @@ Treat dimensions, frame rate, duration, audio support, and other model limits
 as requested targets until a selected provider confirms them. Do not promise
 provider-specific capabilities in a provider-neutral prompt.
 
+Master 6-Reel Campaign Blueprints (25-Second Vertical 9:16 Social Series):
+1. Reel 1 (Single Item Flash Deal):
+   - Focus: Snapping 1 photo, choosing discount badge (FLAT 25% OFF), pinning map, instant live feed.
+   - Core Visual: Friendly bakery shopkeeper with purple apron behind counter holding fresh croissants.
+2. Reel 2 (Shop Catalog with AI Menu Scanner):
+   - Focus: Digitize up to 100 items from paper menus in seconds using AI camera scan.
+   - Core Visual: Cafe owner with paper menu; sweeping AI beam populating editable product cards.
+3. Reel 3 (Walking Distance Deals & Navigation):
+   - Focus: Proximity discovery (closest first), double-tap likes, 1-tap Google Maps walking directions.
+   - Core Visual: Shopper walking down street; tapping Directions and walking straight into shop door.
+4. Reel 4 (Zero Fees, Zero Waiting):
+   - Focus: 100% free ad creation, zero commission/cuts, no approval waiting queue.
+   - Core Visual: Frustrated owner with ad bill vs. meelTe free instant live counter foot traffic.
+5. Reel 5 (Schedule Your Weekend Rush):
+   - Focus: Setting calendar start and end dates in advance; auto-activates at midnight, auto-expires.
+   - Core Visual: Boutique owner setting sale dates on Thursday; relaxed coffee on Saturday morning.
+6. Reel 6 (Total Control In Your Pocket):
+   - Focus: Managing ads from profile, editing prices in 2 taps, instant delete when sold out.
+   - Core Visual: Baker putting "Sold Out" sticker on display; removing ad in 1 tap with no confusion.
+
 ===============================================================================
 4. MULTI-AGENT ARCHITECTURE
 ===============================================================================
