@@ -1,0 +1,74 @@
+{
+  "request_id": "MEE-2026-0001",
+  "campaign_name": "Meelte Ads Launch - The 60-Second Flash Deal",
+  "objective": "Educate local shopkeepers and retail owners on how to create a Single Item ad with instant discount badges in under 60 seconds on meelTe.",
+  "target_audience": "Local small-business owners, retail shopkeepers, boutique owners, bakeries",
+  "platform": "Instagram Reels / short-form social",
+  "duration_seconds": 25,
+  "aspect_ratio": "9:16",
+  "output_dimensions": {
+    "width": 1080,
+    "height": 1920
+  },
+  "key_message": "Post a flash deal in under a minute and reach nearby customers directly with zero listing fees and no approval delays.",
+  "headline": "Got a deal to share today?",
+  "supporting_copy": "Instantly live to nearby neighbors!",
+  "call_to_action": "Grow your store free",
+  "dialogue_or_voiceover": [
+    {
+      "shot_id": "SHOT-01",
+      "time_range": "0:00-0:04",
+      "text": "Got a product you want to sell fast today? Don't wait for foot traffic."
+    },
+    {
+      "shot_id": "SHOT-02",
+      "time_range": "0:04-0:09",
+      "text": "Open meelTe, tap the plus sign, and snap a clear photo."
+    },
+    {
+      "shot_id": "SHOT-03",
+      "time_range": "0:09-0:16",
+      "text": "Add your price, pick your discount badge, and pin your store on the map."
+    },
+    {
+      "shot_id": "SHOT-04",
+      "time_range": "0:16-0:21",
+      "text": "Hit create! No waiting for approvals—your deal goes live to nearby shoppers right now."
+    },
+    {
+      "shot_id": "SHOT-05",
+      "time_range": "0:21-0:25",
+      "text": "Put your shop on the map. Try meelTe free today!"
+    }
+  ],
+  "audio_direction": {
+    "music": "Warm, light, cheerful acoustic guitar rhythm with bouncy beat, ducked -14dB under voiceover.",
+    "sfx": [
+      { "time_seconds": 7.0, "type": "camera_shutter", "description": "Crisp camera shutter click" },
+      { "time_seconds": 12.0, "type": "badge_pop", "description": "Subtle UI pop when discount badge attaches" },
+      { "time_seconds": 18.0, "type": "success_chime", "description": "Gentle upward chime when ad publishes" },
+      { "time_seconds": 22.0, "type": "brand_chord", "description": "Warm acoustic resolve chord on logo card" }
+    ]
+  },
+  "required_elements": [
+    "meelTe brand orange (#FEA711) and purple (#743BAA)",
+    "Exact brand name casing 'meelTe'",
+    "Flat vector 2D illustration style + clean app UI mockups",
+    "9:16 safe area compliance for captions and UI overlays"
+  ],
+  "prohibited_elements": [
+    "No photorealism or 3D clay style",
+    "No invented discounts or fake testimonials",
+    "No generated logo (use reserved zone / deterministic lockup)",
+    "No spelling variants like Meelte or MEELTE"
+  ],
+  "reference_assets": [
+    "brand/meelte-brand.json",
+    "reels/reel-1.md",
+    "How-to-create-an-Ads.md"
+  ],
+  "logo_asset": "brand/assets/logo/primary-full-colour",
+  "style_override": null,
+  "approval_mode": "automatic prompt review"
+}
+

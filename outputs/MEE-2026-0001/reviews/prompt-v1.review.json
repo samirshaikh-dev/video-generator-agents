@@ -1,0 +1,32 @@
+{
+  "request_id": "MEE-2026-0001",
+  "review_version": "1.0.0",
+  "reviewed_artifact": "prompt-v1.md",
+  "reviewer_role": "video-prompt-qa",
+  "timestamp": "2026-11-13T09:37:00Z",
+  "overall_status": "passed",
+  "scores": {
+    "brand_compliance": "pass",
+    "brief_alignment": "pass",
+    "temporal_coherence": "pass",
+    "motion_and_camera_clarity": "pass",
+    "continuity": "pass",
+    "copy_and_claim_accuracy": "pass",
+    "audio_review": "pass"
+  },
+  "checklist": {
+    "objective_audience_explicit": true,
+    "ordered_action_over_time": true,
+    "shot_timings_sum_to_duration": true,
+    "clear_motion_and_camera": true,
+    "character_and_setting_continuity": true,
+    "dominant_orange_and_purple": true,
+    "exact_copy_no_unsupported_claims": true,
+    "no_hallucinated_logo_generation": true,
+    "audio_and_captions_synchronized": true,
+    "provider_neutral_and_truthful": true
+  },
+  "notes": "Shot timing arithmetic verified: 4s + 5s + 7s + 5s + 4s = exactly 25.0s (750 frames at 30fps). Brand palette adherence confirmed (Orange #FEA711 and Purple #743BAA dominant). Logo is specified for deterministic overlay. Word-level caption timestamps and audio ducking curve match the safe area constraints.",
+  "revision_instructions": []
+}
+
